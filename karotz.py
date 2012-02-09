@@ -19,6 +19,10 @@ def signed_rest_call(function, parameters, signature):
     parameters['signature'] = sign_value
     return rest_call(function, parameters)
 
+def rest_call(function, parameters):
+    query = urllib.urlencode(sorted(parameters.items()))
+    return "%s%s?%s" % (BASE_URL, function, query)
+
 def parse_voomsg(message):
     parsed = le.fromstring(message)
     code = parsed.find("response").find("code").text
@@ -29,9 +33,6 @@ def parse_voomsg(message):
     else:
         raise Exception("Unknowen response code: %s" % code)
 
-def rest_call(function, parameters):
-    query = urllib.urlencode(sorted(parameters.items()))
-    return "%s%s?%s" % (BASE_URL, function, query)
 
 def parse_config(config_filename=None):
     """ Parse a configuration file with app settings.
