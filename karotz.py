@@ -63,8 +63,7 @@ class Karotz(object):
         self.__dict__.update(settings)
 
     def start(self):
-        parameters = {}
-        parameters['apikey'], parameters['installid'] = self.apikey, self.installid
+        parameters = {'apikey': self.apikey, 'installid': self.installid}
         parameters['once'] = "%d" % random.randint(100000000, 99999999999)
         parameters['timestamp'] = "%d" % time.time()
         query = sign(parameters, self.secret)
@@ -72,4 +71,4 @@ class Karotz(object):
         # should return an hex string if auth is ok, error 500 if not
         token = f.read()
         parsed = le.fromstring(token)
-        return parsed.find("interactiveMode").find("interactiveId").text
+        self.interactiveId = parsed.find("interactiveMode").find("interactiveId").text
