@@ -11,7 +11,6 @@ import ConfigParser
 
 BASE_URL = 'http://api.karotz.com/api/karotz/'
 
-# sign parameters in alphabetical order
 def signed_rest_call(function, parameters, signature):
     query = urllib.urlencode(sorted(parameters.items()))
     digest_maker = hmac.new(signature, query, hashlib.sha1)
