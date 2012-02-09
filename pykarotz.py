@@ -61,11 +61,14 @@ def parse_config(config_filename=None):
             for setting in ['apikey', 'secret', 'installid'])
 
 def start():
+    parameters = {}
+    parameters['installid'] = INSTALLID
+    parameters['apikey'] = APIKEY
+    parameters['once'] = "%d" % random.randint(100000000, 99999999999)
+    parameters['timestamp'] = "%d" % time.time()
     query = sign(parameters, SECRET)
     f = urllib.urlopen("http://api.karotz.com/api/karotz/start?%s" % query)
     # should return an hex string if auth is ok, error 500 if not
     token = f.read()
     parsed = le.fromstring(token)
     return parsed.find("interactiveMode").find("interactiveId").text
-
-print start()
