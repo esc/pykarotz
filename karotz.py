@@ -13,8 +13,8 @@ import ConfigParser
 
 # sign parameters in alphabetical order
 def sign(parameters, signature):
-    sortedParameters = sorted(parameters.items())
-    query = urllib.urlencode(sortedParameters)
+    sorted_parameters = sorted(parameters.items())
+    query = urllib.urlencode(sorted_parameters)
     digest_maker = hmac.new(signature, query, hashlib.sha1)
     signValue = base64.b64encode(digest_maker.digest())
     query = query + "&signature=" + urllib.quote(signValue)
