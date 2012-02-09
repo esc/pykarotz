@@ -70,13 +70,16 @@ def parse_config(config_filename=None):
     return dict((setting, cp.get(section, setting))
             for setting in ['apikey', 'secret', 'installid'])
 
+
 class KarotzResponseError(Exception):
     pass
+
 
 class Karotz(object):
 
     def __init__(self, settings):
         self.__dict__.update(settings)
+        self.interactiveId = None
 
     def start(self):
         parameters = {'apikey': self.apikey, 'installid': self.installid}
@@ -87,7 +90,6 @@ class Karotz(object):
         token = f.read()
         parsed = le.fromstring(token)
         self.interactiveId = parsed.find("interactiveMode").find("interactiveId").text
-
 
     def stop(self):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
