@@ -19,6 +19,16 @@ def sign(parameters, signature):
     query = query + "&signature=" + urllib.quote(signValue)
     return query
 
+def parse_voomsg(message):
+    parsed = le.fromstring(message)
+    code = parsed.find("response").find("code").text
+    if code == 'OK':
+        pass
+    elif code == 'ERROR':
+        raise KarotzResponseError("Recived an 'ERROR' response.")
+    else:
+        raise Exception("Unknowen response code: %s" % code)
+
 def parse_config(config_filename=None):
     """ Parse a configuration file with app settings.
 
@@ -56,6 +66,8 @@ def parse_config(config_filename=None):
     return dict((setting, cp.get(section, setting))
             for setting in ['apikey', 'secret', 'installid'])
 
+class KarotzResponseError(Exception):
+    pass
 
 class Karotz(object):
 
@@ -73,9 +85,10 @@ class Karotz(object):
         parsed = le.fromstring(token)
         self.interactiveId = parsed.find("interactiveMode").find("interactiveId").text
 
+
     def stop(self):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
         query = urllib.urlencode(sorted(parameters.items()))
-        print query
         f = urllib.urlopen("http://api.karotz.com/api/karotz/interactivemode?%s" % query)
-        print f.read()
+        token = f.read()
+        parse_voomsg(token)
