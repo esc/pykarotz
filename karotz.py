@@ -78,6 +78,7 @@ class KarotzResponseError(Exception):
 class Karotz(object):
 
     def __init__(self, settings):
+        # this will set self.apikey, self.installid, and self.secret
         self.__dict__.update(settings)
         self.interactiveId = None
 
