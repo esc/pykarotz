@@ -15,8 +15,8 @@ BASE_URL = 'http://api.karotz.com/api/karotz/'
 def signed_rest_call(function, parameters, signature):
     query = urllib.urlencode(sorted(parameters.items()))
     digest_maker = hmac.new(signature, query, hashlib.sha1)
-    signValue = base64.b64encode(digest_maker.digest())
-    parameters['signature'] = signValue
+    sign_value = base64.b64encode(digest_maker.digest())
+    parameters['signature'] = sign_value
     return rest_call(function, parameters)
 
 def parse_voomsg(message):
