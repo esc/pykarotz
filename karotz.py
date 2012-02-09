@@ -72,3 +72,10 @@ class Karotz(object):
         token = f.read()
         parsed = le.fromstring(token)
         self.interactiveId = parsed.find("interactiveMode").find("interactiveId").text
+
+    def stop(self):
+        parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
+        query = urllib.urlencode(sorted(parameters.items()))
+        print query
+        f = urllib.urlopen("http://api.karotz.com/api/karotz/interactivemode?%s" % query)
+        print f.read()
