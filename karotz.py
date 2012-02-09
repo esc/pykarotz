@@ -96,3 +96,4 @@ class Karotz(object):
         f = urllib.urlopen(rest_call('interactivemode', parameters))
         token = f.read()
         parse_voomsg(token)
+        self.interactiveId = None
