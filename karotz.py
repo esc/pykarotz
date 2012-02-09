@@ -98,3 +98,14 @@ class Karotz(object):
         token = f.read()
         parse_voomsg(token)
         self.interactiveId = None
+
+    def ears(self, left=0, right=0, relative=True, reset=False):
+        parameters = locals().copy()
+        del parameters['self']
+        parameters['interactiveid'] = self.interactiveId
+        f = urllib.urlopen(rest_call('ears', parameters))
+        #token = f.read()
+        #parse_voomsg(token)
+
+    def reset_ears(self):
+        self.ears(reset=True)
