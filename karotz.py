@@ -12,12 +12,12 @@ import ConfigParser
 BASE_URL = 'http://api.karotz.com/api/karotz/'
 
 # sign parameters in alphabetical order
-def sign(parameters, signature):
+def signed_rest_call(function, parameters, signature):
     query = urllib.urlencode(sorted(parameters.items()))
     digest_maker = hmac.new(signature, query, hashlib.sha1)
     signValue = base64.b64encode(digest_maker.digest())
-    query = query + "&signature=" + urllib.quote(signValue)
-    return query
+    parameters['signature'] = signValue
+    return rest_call(function, parameters)
 
 def parse_voomsg(message):
     parsed = le.fromstring(message)
@@ -29,7 +29,7 @@ def parse_voomsg(message):
     else:
         raise Exception("Unknowen response code: %s" % code)
 
-def rest_call(function, parameters, signed=False):
+def rest_call(function, parameters):
     query = urllib.urlencode(sorted(parameters.items()))
     return "%s%s?%s" % (BASE_URL, function, query)
 
@@ -82,8 +82,8 @@ class Karotz(object):
         parameters = {'apikey': self.apikey, 'installid': self.installid}
         parameters['once'] = "%d" % random.randint(100000000, 99999999999)
         parameters['timestamp'] = "%d" % time.time()
-        query = sign(parameters, self.secret)
-        f = urllib.urlopen("http://api.karotz.com/api/karotz/start?%s" % query)
+        query = signed_rest_call('start', parameters, self.secret)
+        f = urllib.urlopen(query)
         # should return an hex string if auth is ok, error 500 if not
         token = f.read()
         parsed = le.fromstring(token)
