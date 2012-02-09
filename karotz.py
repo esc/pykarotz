@@ -13,15 +13,12 @@ import ConfigParser
 
 # sign parameters in alphabetical order
 def sign(parameters, signature):
-    keys = parameters.keys()
-    keys.sort()
-    sortedParameters = [(key, parameters[key]) for key in keys]
+    sortedParameters = [(key, parameters[key]) for key in sorted(parameters)]
     query = urllib.urlencode(sortedParameters)
     digest_maker = hmac.new(signature, query, hashlib.sha1)
     signValue = base64.b64encode(digest_maker.digest())
     query = query + "&signature=" + urllib.quote(signValue)
     return query
-
 
 def parse_config(config_filename=None):
     """ Parse a configuration file with app settings.
