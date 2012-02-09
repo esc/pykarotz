@@ -82,8 +82,7 @@ class Karotz(object):
         parameters = {'apikey': self.apikey, 'installid': self.installid}
         parameters['once'] = "%d" % random.randint(100000000, 99999999999)
         parameters['timestamp'] = "%d" % time.time()
-        query = signed_rest_call('start', parameters, self.secret)
-        f = urllib.urlopen(query)
+        f = urllib.urlopen(signed_rest_call('start', parameters, self.secret))
         # should return an hex string if auth is ok, error 500 if not
         token = f.read()
         parsed = le.fromstring(token)
