@@ -61,12 +61,14 @@ def parse_config(config_filename=None):
 class Karotz(object):
 
     def __init__(self, settings):
-        self.settings = settings
+        self.__dict__.update(settings)
 
     def start(self):
-        self.settings['once'] = "%d" % random.randint(100000000, 99999999999)
-        self.settings['timestamp'] = "%d" % time.time()
-        query = sign(self.settings, self.settings['secret'])
+        parameters = {}
+        parameters['apikey'], parameters['installid'] = self.apikey, self.installid
+        parameters['once'] = "%d" % random.randint(100000000, 99999999999)
+        parameters['timestamp'] = "%d" % time.time()
+        query = sign(parameters, self.secret)
         f = urllib.urlopen("http://api.karotz.com/api/karotz/start?%s" % query)
         # should return an hex string if auth is ok, error 500 if not
         token = f.read()
