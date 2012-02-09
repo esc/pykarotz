@@ -41,7 +41,7 @@ def parse_config(config_filename=None):
     IOError:
         if config_filename does not exist
     NoSectionError
-        if no section 'karotz-app-config' exists
+        if no section 'karotz-app-settings' exists
     NoOptionError
         if any one of 'apikey', 'secret' and 'installid' does not exist
 
@@ -56,7 +56,7 @@ def parse_config(config_filename=None):
     # convert to dict and return
     # doing it this way, will raise exceptions if the section or option doesn't
     # exist
-    section = 'karotz-app-config'
+    section = 'karotz-app-settings'
     return dict((setting, cp.get(section, setting))
             for setting in ['apikey', 'secret', 'installid'])
 
