@@ -30,7 +30,8 @@ def parse_voomsg(message):
         raise Exception("Unknowen response code: %s" % code)
 
 def rest_call(function, parameters, signed=False):
-    return "%s%s?%s" % (BASE_URL, function, parameters)
+    query = urllib.urlencode(sorted(parameters.items()))
+    return "%s%s?%s" % (BASE_URL, function, query)
 
 def parse_config(config_filename=None):
     """ Parse a configuration file with app settings.
@@ -91,7 +92,6 @@ class Karotz(object):
 
     def stop(self):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
-        query = urllib.urlencode(sorted(parameters.items()))
-        f = urllib.urlopen(rest_call('interactivemode', query))
+        f = urllib.urlopen(rest_call('interactivemode', parameters))
         token = f.read()
         parse_voomsg(token)
