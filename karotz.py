@@ -9,7 +9,7 @@ import base64
 import lxml.etree as le
 import ConfigParser
 
-
+BASE_URL = 'http://api.karotz.com/api/karotz/'
 
 # sign parameters in alphabetical order
 def sign(parameters, signature):
@@ -28,6 +28,9 @@ def parse_voomsg(message):
         raise KarotzResponseError("Recived an 'ERROR' response.")
     else:
         raise Exception("Unknowen response code: %s" % code)
+
+def rest_call(function, parameters, signed=False):
+    return "%s%s?%s" % (BASE_URL, function, parameters)
 
 def parse_config(config_filename=None):
     """ Parse a configuration file with app settings.
@@ -89,6 +92,6 @@ class Karotz(object):
     def stop(self):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
         query = urllib.urlencode(sorted(parameters.items()))
-        f = urllib.urlopen("http://api.karotz.com/api/karotz/interactivemode?%s" % query)
+        f = urllib.urlopen(rest_call('interactivemode', query))
         token = f.read()
         parse_voomsg(token)
