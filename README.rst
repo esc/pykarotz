@@ -6,7 +6,7 @@ About
 -----
 
 A Python library which provides object-oriented access to the REST-API for
-`Karotz`.
+`Karotz`_.
 
 .. _`Karotz`: http://www.karotz.com/home
 
