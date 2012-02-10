@@ -13,7 +13,7 @@ A Python library which provides object-oriented access to the REST-API for
 Author, Copyright and License
 -----------------------------
 
-(C) 2012 Valentin 'esc' Haenel `<esc@zetatech.org>`
+| (C) 2012 Valentin 'esc' Haenel `<esc@zetatech.org>`
 
 pykarotz is licensed under the terms of the MIT License.
 
