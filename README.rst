@@ -8,7 +8,6 @@ About
 A Python library which provides object-oriented access to the REST-API for
 `Karotz`_::
 
-    |
              _           _    ________________
             / \         / \ /                 \
             \  \       /  / |  www.karotz.co  |
