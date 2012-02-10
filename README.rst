@@ -6,7 +6,19 @@ About
 -----
 
 A Python library which provides object-oriented access to the REST-API for
-`Karotz`_.
+`Karotz`_::
+
+            _           _    ________________
+            / \         / \  /                \
+            \  \       /  / |  www.karotz.com  |
+            \  \     /  /   \____  __________/
+    _  __    \  \___/  /    _    /_/
+    | |/ /    /         \   | |
+    | ' /  __|_  O __O __|  | |_  ____
+    |  <  / _` || '__|/ _ \ | __||_  /
+    | . \| (_| || |  | (_) || |_  / /
+    |_|\_\\__,_||_|   \___/  \__|/___|
+
 
 .. _`Karotz`: http://www.karotz.com/home
 
