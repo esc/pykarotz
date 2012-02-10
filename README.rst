@@ -18,7 +18,8 @@ A Python library which provides object-oriented access to the REST-API for
     | '_ \| | | | |/ / _` | '__/ _ \| __|_  /
     | |_) | |_| |   < (_| | | | (_) | |_ / /
     | .__/ \__, |_|\_\__,_|_|  \___/ \__/___|
-    |_|    |___/
+    |_|    |___/       |           |
+                        \_________/
 
 .. _`Karotz`: http://www.karotz.com/home
 
