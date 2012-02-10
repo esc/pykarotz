@@ -9,11 +9,11 @@ A Python library which provides object-oriented access to the REST-API for
 `Karotz`_::
 
     |
-             _           _   ________________
-            / \         / \ /                \
-            \  \       /  / |  www.karotz.com|
-            \  \     /  /   \____  __________/
-    _  __    \  \___/  /    _    /_/
+             _           _    ________________
+            / \         / \ /                 \
+            \  \       /  / |  www.karotz.co  |
+             \  \     /  /  \____  ___________/
+     _  __    \  \___/  /    _    /_/
     | |/ /    /         \   | |
     | ' /  __|_  O __O __|  | |_  ____
     |  <  / _` || '__|/ _ \ | __||_  /
