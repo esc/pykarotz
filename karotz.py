@@ -32,6 +32,13 @@ def parse_voomsg(message):
     else:
         raise Exception("Unknowen response code: %s" % code)
 
+def unmarshall_voomsg(message):
+    parsed = le.fromstring(message)
+    um = {}
+    for field in ['id', 'correlationid', 'interactiveid']:
+        um[field] = parsed.find(field).text
+    um['code'] = parsed.find("response").find("code").text
+    return um
 
 def parse_config(config_filename=None):
     """ Parse a configuration file with app settings.
