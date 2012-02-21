@@ -120,3 +120,9 @@ class Karotz(object):
 
     def reset_ears(self):
         self.ears(reset=True)
+
+    def led_light(self, color='FFFFFF'):
+        parameters = {'action': 'light',
+                      'color': color,
+                      'interactiveid': self.interactiveId}
+        f = urllib.urlopen(rest_call('led', parameters))
