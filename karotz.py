@@ -83,7 +83,10 @@ class KarotzResponseError(Exception):
 
 class Karotz(object):
 
-    def __init__(self, settings):
+    def __init__(self, settings=None):
+        # if no settings given, search in the default location
+        if settings is None:
+            settings = parse_config()
         # this will set self.apikey, self.installid, and self.secret
         self.__dict__.update(settings)
         self.interactiveId = None
