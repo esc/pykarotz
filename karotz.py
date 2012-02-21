@@ -40,7 +40,7 @@ def unmarshall_voomsg(message):
     um['code'] = parsed.find("response").find("code").text
     return um
 
-def parse_config(config_filename=None):
+def parse_config(section="karotz-app-settings", config_filename=None):
     """ Parse a configuration file with app settings.
 
     Parameters
@@ -73,7 +73,6 @@ def parse_config(config_filename=None):
     # convert to dict and return
     # doing it this way, will raise exceptions if the section or option doesn't
     # exist
-    section = 'karotz-app-settings'
     return dict((setting, cp.get(section, setting))
             for setting in ['apikey', 'secret', 'installid'])
 
