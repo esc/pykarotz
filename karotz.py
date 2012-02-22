@@ -101,7 +101,17 @@ class Karotz(object):
         # should return an hex string if auth is ok, error 500 if not
         token = f.read()
         parsed = le.fromstring(token)
-        self.interactiveId = parsed.find("interactiveMode").find("interactiveId").text
+        im = parsed.find("interactiveMode")
+        if im is not None:
+            # all is good
+            self.interactiveId = im.find("interactiveId").text
+        else:
+            # something went wrong
+            resp = parsed.find("response")
+            if resp.find("code").text == 'ERROR':
+                raise KarotzResponseError("Recived an 'ERROR' response")
+            else:
+                raise KarotzResponseError("Recived an unkonwen response:\n%s" % token)
 
     def stop(self):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
