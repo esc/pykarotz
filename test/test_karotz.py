@@ -6,14 +6,40 @@ import karotz as kz
 BASE_PATH = "test/config_files/"
 
 EXAMPLE_RESPONSE = """
-<voosmsg>
-  <id>23426660-beef-beee-baad-food0000babe</id>
-  <correlationid>23426660-beef-beee-baad-food0000babe</correlationid>
-  <interactiveid>23426660-beef-beee-baad-food0000babe</interactiveid>
-  <response>
-    <code>OK</code>
-  </response>
-</voosmsg>"""
+<VoosMsg>
+    <id>23426660-beef-beee-baad-food0000babe</id>
+    <correlationId>23426660-beef-beee-baad-food0000babe</correlationId>
+    <interactiveId>23426660-beef-beee-baad-food0000babe</interactiveId>
+    <callback></callback>
+    <response>
+        <code>OK</code>
+    </response>
+</VoosMsg>
+"""
+
+EXAMPLE_START_OK = """
+<VoosMsg>
+    <id>23426660-beef-beee-baad-food0000babe</id>
+    <recipient>23426660beefbeeebaadfood0000babe</recipient>
+    <interactiveMode>
+        <action>START</action>
+        <interactiveId>23426660-beef-beee-baad-food0000babe</interactiveId>
+        <configId>23426660-beef-beee-baad-food0000babe</configId>
+        <access>ears</access>
+        <access>led</access>
+        <access>multimedia</access>
+        <access>tts</access>
+    </interactiveMode>
+</VoosMsg> """
+
+EXAMPLE_START_ERROR = """
+<VoosMsg>
+    <id>23426660-beef-beee-baad-food0000babe</id>
+    <correlationId>23426660-beef-beee-baad-food0000babe</correlationId>
+    <response>
+        <code>ERROR</code>
+    </response>
+</VoosMsg> """
 
 DUMMY_VALUE = "23426660-beef-beee-baad-food0000babe"
 
@@ -35,6 +61,6 @@ def test_parse_config_bad():
 
 def test_unmarshall_voomsg():
     um = kz.unmarshall_voomsg(EXAMPLE_RESPONSE)
-    for field in ['id', 'correlationid', 'interactiveid']:
+    for field in ['id', 'correlationId', 'interactiveId']:
         nt.assert_equal(DUMMY_VALUE, um[field])
     nt.assert_equal('OK', um['code'])

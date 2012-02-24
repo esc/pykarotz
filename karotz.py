@@ -33,11 +33,9 @@ def parse_voomsg(message):
         raise Exception("Unknowen response code: %s" % code)
 
 def unmarshall_voomsg(message):
-    parsed = le.fromstring(message)
-    um = {}
-    for field in ['id', 'correlationid', 'interactiveid']:
-        um[field] = parsed.find(field).text
     um['code'] = parsed.find("response").find("code").text
+    for field in ['id', 'correlationId', 'interactiveId']:
+        um[field] = parsed.find(field).text
     return um
 
 def parse_config(section="karotz-app-settings", config_filename=None):
