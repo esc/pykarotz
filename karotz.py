@@ -22,18 +22,14 @@ def rest_call(function, parameters):
     query = urllib.urlencode(sorted(parameters.items()))
     return "%s%s?%s" % (BASE_URL, function, query)
 
-def parse_voomsg(message):
-    parsed = le.fromstring(message)
-    code = parsed.find("response").find("code").text
-    if code == 'OK':
-        pass
-    elif code == 'ERROR':
-        raise KarotzResponseError("Recived an 'ERROR' response.")
-    else:
-        raise Exception("Unknowen response code: %s" % code)
-
-def unmarshall_voomsg(message):
-    unmarshalled['code'] = parsed.find("response").find("code").text
+def unmarshall_voomsg(token):
+    if token is None:
+        # unfortunately the Karotz REST API does not return a proper error
+        # message in case you make a wrong call, but instead None
+        raise KarotzResponseError(
+                "Rest call returned 'None', probably an error.")
+    parsed = le.fromstring(token)
+    unmarshalled = {'code': parsed.find("response").find("code").text}
     for field in ['id', 'correlationId', 'interactiveId']:
         unmarshalled[field] = parsed.find(field).text
     return unmarshalled
