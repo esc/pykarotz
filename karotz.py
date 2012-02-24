@@ -33,10 +33,10 @@ def parse_voomsg(message):
         raise Exception("Unknowen response code: %s" % code)
 
 def unmarshall_voomsg(message):
-    um['code'] = parsed.find("response").find("code").text
+    unmarshalled['code'] = parsed.find("response").find("code").text
     for field in ['id', 'correlationId', 'interactiveId']:
-        um[field] = parsed.find(field).text
-    return um
+        unmarshalled[field] = parsed.find(field).text
+    return unmarshalled
 
 def parse_config(section="karotz-app-settings", config_filename=None):
     """ Parse a configuration file with app settings.
@@ -117,7 +117,7 @@ class Karotz(object):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
         f = urllib.urlopen(rest_call('interactivemode', parameters))
         token = f.read()
-        parse_voomsg(token)
+        unmarshalled = unmarshall_voomsg(token)
         self.interactiveId = None
 
     def ears(self, left=0, right=0, relative=True, reset=False):
