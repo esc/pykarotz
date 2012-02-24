@@ -5,8 +5,8 @@ pykarotz -- Python interface to Karotz
 About
 -----
 
-A Python library which provides object-oriented access to the REST-API for
-`Karotz`_::
+A (work-in-progress) Python library which provides object-oriented access to
+the REST-API for `Karotz`_::
 
                        _           _    ________________________________
                       / \         / \ /                                 \
@@ -22,6 +22,49 @@ A Python library which provides object-oriented access to the REST-API for
                         \_________/
 
 .. _`Karotz`: http://www.karotz.com/home
+
+Installation
+------------
+
+Place the `karotz.py` file where you want to use it.
+
+Usage
+-----
+
+First, you mus register an interactive application and install this on the
+target Karotz. For now, you can find some great instructions on the `Ruby API
+blogpost <http://blog.nofail.de/2011/12/karotz-ruby-love/>`_.
+
+After doing this, you will have an `INSTALL_ID`, `API_KEY` and a `SECRET`. You
+have several ways to use these with `pykarotz`. The easiest is to place the
+configuration in the file `$HOME/.pykarotz`, for example:
+
+    [karotz-app-settings]
+    apikey = 23426660-beef-beee-baad-food0000babe
+    secret = 23426660-beef-beee-baad-food0000babe
+    installid = 23426660-beef-beee-baad-food0000babe
+
+If you have done everything correctly, you can establish a connection and demo
+the available colors from an interactive Python prompt using:
+
+    >>> import karotz as kz
+    >>> krtz = kz.Karotz()
+    >>> krtz.demo_led()A
+    >>> krtz.stop()
+
+Testing
+-------
+
+Install `nose <http://readthedocs.org/docs/nose/en/latest/>`_ and then do::
+
+    $ nosetests
+
+Similar Projects
+----------------
+
+* `Ruby <https://github.com/phoet/karotz>`_
+* `Php <http://wizz.cc/blog/index.php?post/2011/04/12/Karotz-Php-Class>`_
+
 
 Author, Copyright and License
 -----------------------------
