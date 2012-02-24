@@ -31,7 +31,7 @@ Dependencies
 Installation
 ------------
 
-Place the `karotz.py` file where you want to use it.
+Place the ``karotz.py`` file where you want to use it.
 
 Usage
 -----
@@ -40,9 +40,9 @@ First, you mus register an interactive application and install this on the
 target Karotz. For now, you can find some great instructions on the `Ruby API
 blogpost <http://blog.nofail.de/2011/12/karotz-ruby-love/>`_.
 
-After doing this, you will have an `INSTALL_ID`, `API_KEY` and a `SECRET`. You
-have several ways to use these with `pykarotz`. The easiest is to place the
-configuration in the file `$HOME/.pykarotz`, for example::
+After doing this, you will have an ``INSTALL_ID``, ``API_KEY`` and a
+``SECRET``. You have several ways to use these with ``pykarotz``. The easiest
+is to place the configuration in the file ``$HOME/.pykarotz``, for example::
 
     [karotz-app-settings]
     apikey = 23426660-beef-beee-baad-food0000babe
