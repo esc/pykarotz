@@ -16,11 +16,16 @@ def signed_rest_call(function, parameters, signature):
     digest_maker = hmac.new(signature, query, hashlib.sha1)
     sign_value = base64.b64encode(digest_maker.digest())
     parameters['signature'] = sign_value
-    return rest_call(function, parameters)
+    return assemble_rest_call(function, parameters)
 
-def rest_call(function, parameters):
+def assemble_rest_call(function, parameters):
     query = urllib.urlencode(sorted(parameters.items()))
     return "%s%s?%s" % (BASE_URL, function, query)
+
+def rest_call(function, parameters):
+    file_like = urllib.urlopen(assemble_rest_call(function, parameters))
+    token = file_like.read()
+    unmarshall_voomsg(token)
 
 def unmarshall_voomsg(token):
     """ Unmarshall a standard VooMsg
@@ -129,18 +134,14 @@ class Karotz(object):
 
     def stop(self):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
-        f = urllib.urlopen(rest_call('interactivemode', parameters))
-        token = f.read()
-        unmarshalled = unmarshall_voomsg(token)
+        rest_call('interactivemode', parameters)
         self.interactiveId = None
 
     def ears(self, left=0, right=0, relative=True, reset=False):
         parameters = locals().copy()
         del parameters['self']
         parameters['interactiveid'] = self.interactiveId
-        f = urllib.urlopen(rest_call('ears', parameters))
-        #token = f.read()
-        #parse_voomsg(token)
+        rest_call('ears', parameters)
 
     def reset_ears(self):
         self.ears(reset=True)
@@ -149,4 +150,4 @@ class Karotz(object):
         parameters = {'action': 'light',
                       'color': color,
                       'interactiveid': self.interactiveId}
-        f = urllib.urlopen(rest_call('led', parameters))
+        rest_call('led', parameters)
