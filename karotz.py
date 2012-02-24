@@ -162,3 +162,9 @@ class Karotz(object):
                       'color': color,
                       'interactiveid': self.interactiveId}
         rest_call('led', parameters)
+
+    def demo_light(self):
+        for color in COLORS:
+            self.led_light(color=color)
+            time.sleep(1)
+        self.led_light(color=PINK)
