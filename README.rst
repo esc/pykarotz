@@ -37,7 +37,7 @@ blogpost <http://blog.nofail.de/2011/12/karotz-ruby-love/>`_.
 
 After doing this, you will have an `INSTALL_ID`, `API_KEY` and a `SECRET`. You
 have several ways to use these with `pykarotz`. The easiest is to place the
-configuration in the file `$HOME/.pykarotz`, for example:
+configuration in the file `$HOME/.pykarotz`, for example::
 
     [karotz-app-settings]
     apikey = 23426660-beef-beee-baad-food0000babe
