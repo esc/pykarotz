@@ -49,7 +49,7 @@ the available colors from an interactive Python prompt using:
 
     >>> import karotz as kz
     >>> krtz = kz.Karotz()
-    >>> krtz.demo_led()A
+    >>> krtz.demo_led()
     >>> krtz.stop()
 
 Testing
