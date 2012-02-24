@@ -23,9 +23,27 @@ def rest_call(function, parameters):
     return "%s%s?%s" % (BASE_URL, function, query)
 
 def unmarshall_voomsg(token):
+    """ Unmarshall a standard VooMsg
+
+    Parameters
+    ----------
+
+    token : xml string
+        the returned token from the REST call
+
+    Returns
+    -------
+    unmarshalled : dict
+        dictionary containing 'code', 'id' 'correlationId' and 'interactiveId'
+
+    Notes
+    -----
+    Unfortunately the Karotz REST API does not return a proper errormessage in
+    case you make a wrong call, but instead None. In this case this function
+    raises a 'KarotzResponseError'.
+
+    """
     if token is None:
-        # unfortunately the Karotz REST API does not return a proper error
-        # message in case you make a wrong call, but instead None
         raise KarotzResponseError(
                 "Rest call returned 'None', probably an error.")
     parsed = le.fromstring(token)
