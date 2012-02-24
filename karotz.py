@@ -11,6 +11,17 @@ import ConfigParser
 
 BASE_URL = 'http://api.karotz.com/api/karotz/'
 
+RED = "FF00000"
+ORANGE = "FFFF00"
+PINK = "FFFFFF"
+GREEN = "00FF00"
+INDIGO = "00FFFF"
+BLUE = "0000FF"
+PURPLE = "FF00FF"
+OFF = "000000"
+
+COLORS = [RED, ORANGE, PINK, GREEN, BLUE, INDIGO, PURPLE, OFF]
+
 def signed_rest_call(function, parameters, signature):
     query = urllib.urlencode(sorted(parameters.items()))
     digest_maker = hmac.new(signature, query, hashlib.sha1)
