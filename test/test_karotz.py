@@ -64,3 +64,4 @@ def test_unmarshall_voomsg():
     for field in ['id', 'correlationId', 'interactiveId']:
         nt.assert_equal(DUMMY_VALUE, um[field])
     nt.assert_equal('OK', um['code'])
+    nt.assert_raises(kz.KarotzResponseError, kz.unmarshall_voomsg, None)
