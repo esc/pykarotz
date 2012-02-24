@@ -18,9 +18,10 @@ GREEN = "00FF00"
 INDIGO = "00FFFF"
 BLUE = "0000FF"
 PURPLE = "FF00FF"
+WHITE = "4FFF68"
 OFF = "000000"
 
-COLORS = [RED, ORANGE, PINK, GREEN, BLUE, INDIGO, PURPLE, OFF]
+COLORS = [RED, ORANGE, PINK, GREEN, BLUE, INDIGO, PURPLE, WHITE, OFF]
 
 def signed_rest_call(function, parameters, signature):
     query = urllib.urlencode(sorted(parameters.items()))
