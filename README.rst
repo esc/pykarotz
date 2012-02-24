@@ -23,6 +23,11 @@ the REST-API for `Karotz`_::
 
 .. _`Karotz`: http://www.karotz.com/home
 
+Dependencies
+------------
+
+* `lxml <http://lxml.de/>`_
+
 Installation
 ------------
 
