@@ -109,7 +109,9 @@ class Karotz(object):
             # something went wrong
             resp = parsed.find("response")
             if resp.find("code").text == 'ERROR':
-                raise KarotzResponseError("Recived an 'ERROR' response")
+                raise KarotzResponseError(
+                        "Recived an 'ERROR' response, the full message was: \n%s"
+                        % le.tostring(parsed, pretty_print=True))
             else:
                 raise KarotzResponseError("Recived an unkonwen response:\n%s" % token)
 
