@@ -28,9 +28,9 @@ COLORS = [OFF, BLUE, CYAN, GREEN,
 
 SETTINGS = ['apikey', 'secret', 'installid']
 
-def signed_rest_call(function, parameters, signature):
+def signed_rest_call(function, parameters, secret):
     query = urllib.urlencode(sorted(parameters.items()))
-    digest_maker = hmac.new(signature, query, hashlib.sha1)
+    digest_maker = hmac.new(secret, query, hashlib.sha1)
     sign_value = base64.b64encode(digest_maker.digest())
     parameters['signature'] = sign_value
     return assemble_rest_call(function, parameters)
