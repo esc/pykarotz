@@ -201,15 +201,16 @@ class Karotz(object):
         self.access = unmarshalled["access"]
 
     def stop(self):
-        parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
-        rest_call('interactivemode', parameters)
+        rest_call('interactivemode', {'action': 'stop',
+                                      'interactiveid': self.interactiveId})
         self.interactiveId = None
 
     def ears(self, left=0, right=0, relative=True, reset=False):
-        parameters = locals().copy()
-        del parameters['self']
-        parameters['interactiveid'] = self.interactiveId
-        rest_call('ears', parameters)
+        rest_call('ears', {'left' : left,
+                           'right' : right,
+                           'relative' : relative,
+                           'reset' : reset,
+                           'interactiveid': self.interactiveId})
 
     def reset_ears(self):
         self.ears(reset=True)
@@ -218,10 +219,9 @@ class Karotz(object):
         self.ears(left=23 ,right=23, relative=False)
 
     def led_light(self, color='FFFFFF'):
-        parameters = {'action': 'light',
-                      'color': color,
-                      'interactiveid': self.interactiveId}
-        rest_call('led', parameters)
+        rest_call('led', {'action': 'light',
+                          'color': color,
+                          'interactiveid': self.interactiveId})
 
     def demo_led(self):
         for color in COLORS:
