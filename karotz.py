@@ -158,6 +158,9 @@ class Karotz(object):
     def reset_ears(self):
         self.ears(reset=True)
 
+    def sad(self):
+        self.ears(left=23 ,right=23, relative=False)
+
     def led_light(self, color='FFFFFF'):
         parameters = {'action': 'light',
                       'color': color,
