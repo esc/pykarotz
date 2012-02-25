@@ -155,7 +155,7 @@ class Karotz(object):
         file_like = urllib.urlopen(signed_rest_call('start', parameters, self.secret))
         # should return an hex string if auth is ok, error 500 if not
         unmarshalled = unmarshall_start_voomsg(file_like.read())
-        self.interactiveid = unmarshalled["interactiveId"]
+        self.interactiveId = unmarshalled["interactiveId"]
         self.access = unmarshalled["access"]
 
     def stop(self):
