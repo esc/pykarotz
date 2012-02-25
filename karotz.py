@@ -39,6 +39,21 @@ def rest_call(function, parameters):
     token = file_like.read()
     unmarshall_voomsg(token)
 
+def unmarshall_start_voomsg(token):
+    parsed = le.fromstring(token)
+    im = parsed.find("interactiveMode")
+    if im is not None:
+        return im.find("interactiveId").text
+    else:
+        # something went wrong
+        resp = parsed.find("response")
+        if resp.find("code").text == 'ERROR':
+            raise KarotzResponseError(
+                    "Recived an 'ERROR' response, the full message was: \n%s"
+                    % le.tostring(parsed, pretty_print=True))
+        else:
+            raise KarotzResponseError("Recived an unkonwen response:\n%s" % token)
+
 def unmarshall_voomsg(token):
     """ Unmarshall a standard VooMsg
 
@@ -129,20 +144,7 @@ class Karotz(object):
         f = urllib.urlopen(signed_rest_call('start', parameters, self.secret))
         # should return an hex string if auth is ok, error 500 if not
         token = f.read()
-        parsed = le.fromstring(token)
-        im = parsed.find("interactiveMode")
-        if im is not None:
-            # all is good
-            self.interactiveId = im.find("interactiveId").text
-        else:
-            # something went wrong
-            resp = parsed.find("response")
-            if resp.find("code").text == 'ERROR':
-                raise KarotzResponseError(
-                        "Recived an 'ERROR' response, the full message was: \n%s"
-                        % le.tostring(parsed, pretty_print=True))
-            else:
-                raise KarotzResponseError("Recived an unkonwen response:\n%s" % token)
+        self.interactiveid = unmarshall_start_voomsg(token)
 
     def stop(self):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
