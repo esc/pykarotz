@@ -58,7 +58,8 @@ def unmarshall_start_voomsg(token):
                     "Recived an 'ERROR' response, the full message was: \n%s"
                     % le.tostring(parsed, pretty_print=True))
         else:
-            raise KarotzResponseError("Recived an unkonwen response:\n%s" % token)
+            raise KarotzResponseError("Recived an unkonwen response:\n%s" %
+                    le.tostring(parsed, pretty_print=True))
 
 def unmarshall_voomsg(token):
     """ Unmarshall a standard VooMsg
