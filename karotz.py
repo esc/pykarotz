@@ -75,8 +75,7 @@ def rest_call(function, parameters):
 
     """
     file_like = urllib.urlopen(assemble_rest_call(function, parameters))
-    token = file_like.read()
-    unmarshall_voomsg(token)
+    unmarshall_voomsg(file_like.read())
 
 def unmarshall_start_voomsg(token):
     parsed = le.fromstring(token)
