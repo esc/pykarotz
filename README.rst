@@ -64,6 +64,15 @@ In case you have placed the file somwhere else, for example
     >>> settings = kz.parse_config(config_filename="C:\pykarotz.txt")
     >>> krtz = kz.Karotz(settings=settings)
 
+If instead, you want to hardcode the settings in your Python file, you can do
+something like:
+
+    >>> import karotz as kz
+    >>> settings['apikey'] = "23426660-beef-beee-baad-food0000babe"
+    >>> settings['installid'] = "23426660-beef-beee-baad-food0000babe"
+    >>> settings['secret'] = "23426660-beef-beee-baad-food0000babe"
+    >>> krtz = kz.Karotz(settings=settings)
+
 Testing
 -------
 
