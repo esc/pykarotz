@@ -26,6 +26,8 @@ COLORS = [OFF, BLUE, CYAN, GREEN,
           ORANGE, PINK, PURPLE, RED,
           YELLOW, WHITE]
 
+SETTINGS = ['apikey', 'secret', 'installid']
+
 def signed_rest_call(function, parameters, signature):
     query = urllib.urlencode(sorted(parameters.items()))
     digest_maker = hmac.new(signature, query, hashlib.sha1)
@@ -129,7 +131,7 @@ def parse_config(section="karotz-app-settings", config_filename=None):
     # doing it this way, will raise exceptions if the section or option doesn't
     # exist
     return dict((setting, cp.get(section, setting))
-            for setting in ['apikey', 'secret', 'installid'])
+            for setting in SETTINGS)
 
 
 class KarotzResponseError(Exception):
@@ -142,9 +144,9 @@ class Karotz(object):
         # if no settings given, search in the default location
         if settings is None:
             settings = parse_config()
-        self.apikey = settings['apikey']
-        self.installid = settings['installid']
-        self.secret = settings['secret']
+        for setting in SETTINGS:
+            assert settings.has_key(setting)
+        self.settings = settings
         self.interactiveId = None
         if start:
             self.start()
@@ -153,10 +155,13 @@ class Karotz(object):
         self.stop()
 
     def start(self):
-        parameters = {'apikey': self.apikey, 'installid': self.installid}
+        parameters = {'apikey': self.settings['apikey'],
+                      'installid': self.settings['installid']}
         parameters['once'] = "%d" % random.randint(100000000, 99999999999)
         parameters['timestamp'] = "%d" % time.time()
-        file_like = urllib.urlopen(signed_rest_call('start', parameters, self.secret))
+        file_like = urllib.urlopen(signed_rest_call('start',
+                                   parameters,
+                                   self.settings['secret']))
         # should return an hex string if auth is ok, error 500 if not
         unmarshalled = unmarshall_start_voomsg(file_like.read())
         self.interactiveId = unmarshalled["interactiveId"]
