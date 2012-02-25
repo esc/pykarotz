@@ -141,8 +141,9 @@ class Karotz(object):
         # if no settings given, search in the default location
         if settings is None:
             settings = parse_config()
-        # this will set self.apikey, self.installid, and self.secret
-        self.__dict__.update(settings)
+        self.apikey = settings['apikey']
+        self.installid = settings['installid']
+        self.secret = settings['secret']
         self.interactiveId = None
         if start:
             self.start()
