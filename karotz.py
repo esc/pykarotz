@@ -86,7 +86,7 @@ def unmarshall_voomsg(token):
                 "Rest call returned 'None', probably an error.")
     parsed = le.fromstring(token)
     unmarshalled = {'code': parsed.find("response").find("code").text}
-    if resp.find("code").text != 'OK':
+    if unmarshalled['code'] != 'OK':
         raise KarotzResponseError(
                 "Recived an non 'OK' response, the full message was: \n%s"
                 % le.tostring(parsed, pretty_print=True))
