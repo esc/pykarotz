@@ -65,3 +65,9 @@ def test_unmarshall_voomsg():
         nt.assert_equal(DUMMY_VALUE, um[field])
     nt.assert_equal('OK', um['code'])
     nt.assert_raises(kz.KarotzResponseError, kz.unmarshall_voomsg, None)
+
+def test_unmarshall_start_voomsg():
+    um = kz.unmarshall_start_voomsg(EXAMPLE_START_OK)
+    nt.assert_equal(DUMMY_VALUE, um["interactiveId"])
+    nt.assert_equal(['ears', 'led', 'multimedia', 'tts'], um["access"])
+

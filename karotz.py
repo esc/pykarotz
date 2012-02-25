@@ -43,7 +43,12 @@ def unmarshall_start_voomsg(token):
     parsed = le.fromstring(token)
     im = parsed.find("interactiveMode")
     if im is not None:
-        return im.find("interactiveId").text
+        unmarshalled = {"interactiveId": im.find("interactiveId").text,
+               "access": [element.text
+                    for element in
+                    im.findall("access")]
+                }
+        return unmarshalled
     else:
         # something went wrong
         resp = parsed.find("response")
@@ -141,10 +146,11 @@ class Karotz(object):
         parameters = {'apikey': self.apikey, 'installid': self.installid}
         parameters['once'] = "%d" % random.randint(100000000, 99999999999)
         parameters['timestamp'] = "%d" % time.time()
-        f = urllib.urlopen(signed_rest_call('start', parameters, self.secret))
+        file_like = urllib.urlopen(signed_rest_call('start', parameters, self.secret))
         # should return an hex string if auth is ok, error 500 if not
-        token = f.read()
-        self.interactiveid = unmarshall_start_voomsg(token)
+        unmarshalled = unmarshall_start_voomsg(file_like.read())
+        self.interactiveid = unmarshalled["interactiveId"]
+        self.access = unmarshalled["access"]
 
     def stop(self):
         parameters = {'action': 'stop', 'interactiveid': self.interactiveId}
