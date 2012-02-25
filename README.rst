@@ -57,6 +57,13 @@ the available colors from an interactive Python prompt using:
     >>> krtz.demo_led()
     >>> krtz.stop()
 
+In case you have placed the file somwhere else, for example
+``C:\pykarotz.txt``, you can initialise the ``Karotz`` class using:
+
+    >>> import karotz as kz
+    >>> settings = kz.parse_config(config_filename="C:\pykarotz.txt")
+    >>> krtz = kz.Karotz(settings=settings)
+
 Testing
 -------
 
