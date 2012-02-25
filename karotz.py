@@ -47,10 +47,8 @@ def unmarshall_start_voomsg(token):
     im = parsed.find("interactiveMode")
     if im is not None:
         unmarshalled = {"interactiveId": im.find("interactiveId").text,
-               "access": [element.text
-                    for element in
-                    im.findall("access")]
-                }
+                        "access": [element.text
+                            for element in im.findall("access")]}
         return unmarshalled
     else:
         # something went wrong
