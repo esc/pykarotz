@@ -142,6 +142,9 @@ class Karotz(object):
         if start:
             self.start()
 
+    def __del__(self):
+        self.stop()
+
     def start(self):
         parameters = {'apikey': self.apikey, 'installid': self.installid}
         parameters['once'] = "%d" % random.randint(100000000, 99999999999)
