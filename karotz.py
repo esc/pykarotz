@@ -189,4 +189,3 @@ class Karotz(object):
         for color in COLORS:
             self.led_light(color=color)
             time.sleep(1)
-        self.led_light(color=PINK)
