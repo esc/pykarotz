@@ -11,17 +11,20 @@ import ConfigParser
 
 BASE_URL = 'http://api.karotz.com/api/karotz/'
 
-RED = "FF00000"
-ORANGE = "FFFF00"
-PINK = "FFFFFF"
-GREEN = "00FF00"
-INDIGO = "00FFFF"
-BLUE = "0000FF"
-PURPLE = "FF00FF"
-WHITE = "4FFF68"
-OFF = "000000"
+OFF    = "000000"
+BLUE   = "0000FF"
+CYAN   = "00FF9F"
+GREEN  = "00FF00"
+ORANGE = "FFA500"
+PINK   = "FFCFAF"
+PURPLE = "9F00FF"
+RED    = "FF0000"
+YELLOW = "75FF00"
+WHITE  = "4FFF68"
 
-COLORS = [RED, ORANGE, PINK, GREEN, BLUE, INDIGO, PURPLE, WHITE, OFF]
+COLORS = [OFF, BLUE, CYAN, GREEN,
+          ORANGE, PINK, PURPLE, RED,
+          YELLOW, WHITE]
 
 def signed_rest_call(function, parameters, signature):
     query = urllib.urlencode(sorted(parameters.items()))
