@@ -36,6 +36,21 @@ def signed_rest_call(function, parameters, signature):
     return assemble_rest_call(function, parameters)
 
 def assemble_rest_call(function, parameters):
+    """ Create a URL suitable for making a REST call to api.karotz.com.
+
+    Parameters
+    ----------
+    function : str
+        the api function to execute
+    parameters : dict
+        the parameters to use in the call
+
+    Returns
+    -------
+    url : str
+        an ready make url
+
+    """
     query = urllib.urlencode(sorted(parameters.items()))
     return "%s%s?%s" % (BASE_URL, function, query)
 
