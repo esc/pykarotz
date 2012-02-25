@@ -55,6 +55,25 @@ def assemble_rest_call(function, parameters):
     return "%s%s?%s" % (BASE_URL, function, query)
 
 def rest_call(function, parameters):
+    """ Make a rest call.
+
+    Will assemble the url and make the call. Does not return anything, but
+    raises KarotzResponseError if the call was not OK or no response is
+    received.
+
+    Parameters
+    ----------
+    function : str
+        the api function to execute
+    parameters : dict
+        the parameters to use in the call
+
+    Raises
+    ------
+    KarotzResponseError
+        if the call was unsucessful
+
+    """
     file_like = urllib.urlopen(assemble_rest_call(function, parameters))
     token = file_like.read()
     unmarshall_voomsg(token)
