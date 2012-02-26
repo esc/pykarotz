@@ -223,7 +223,7 @@ class Karotz(object):
         self.ears(reset=True)
 
     def sad(self):
-        self.ears(left=23 ,right=23, relative=False)
+        self.ears(left=23, right=23, relative=False)
 
     def led_light(self, color='FFFFFF'):
         rest_call('led', {'action': 'light',
