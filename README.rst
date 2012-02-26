@@ -36,9 +36,9 @@ Place the ``karotz.py`` file where you want to use it.
 Usage
 -----
 
-First, you mus register an interactive application and install this on the
+First, you must register an interactive application and install this on the
 target Karotz. For now, you can find some great instructions on the `Ruby API
-blogpost <http://blog.nofail.de/2011/12/karotz-ruby-love/>`_.
+blog-post <http://blog.nofail.de/2011/12/karotz-ruby-love/>`_.
 
 After doing this, you will have an ``INSTALL_ID``, ``API_KEY`` and a
 ``SECRET``. You have several ways to use these with ``pykarotz``. The easiest
@@ -57,7 +57,7 @@ the available colors from an interactive Python prompt using:
     >>> krtz.demo_led()
     >>> krtz.stop()
 
-In case you have placed the file somwhere else, for example
+In case you have placed the file somewhere else, for example
 ``C:\pykarotz.txt``, you can initialise the ``Karotz`` class using:
 
     >>> import karotz as kz
