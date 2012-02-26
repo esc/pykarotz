@@ -41,6 +41,37 @@ EXAMPLE_START_ERROR = """
     </response>
 </VoosMsg> """
 
+EXAMPLE_CONFIG_RESPONSE = """
+<ConfigResponse>
+  <config>
+    <interruptible>false</interruptible>
+    <awake>false</awake>
+    <name>config</name>
+    <uuid>2176d8f0-4d1e-494f-aac9-128b76db6fcf</uuid>
+    <params>
+      <key>awake</key>
+      <value>false</value>
+    </params>
+    <params>
+      <key>interruptible</key>
+      <value>false</value>
+    </params>
+    <params>
+      <key>permanentTriggerActivator</key>
+      <value>false</value>
+    </params>
+    <params>
+      <key>scheduledDateTriggerActivator</key>
+      <value>false</value>
+    </params>
+    <params>
+      <key>scheduledTriggerActivator</key>
+      <value>false</value>
+    </params>
+  </config>
+</ConfigResponse> """
+
+
 DUMMY_VALUE = "23426660-beef-beee-baad-food0000babe"
 
 def _f(filename):
