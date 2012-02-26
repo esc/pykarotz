@@ -33,6 +33,13 @@ COLORS = [OFF, BLUE, CYAN, GREEN,
           ORANGE, PINK, PURPLE, RED,
           YELLOW, WHITE]
 
+ENGLISH = "EN"
+GERMAN  = "DE"
+FRENCH  = "FR"
+SPANISH = "ES"
+
+LANGUAGES = [ENGLISH, GERMAN, FRENCH, SPANISH]
+
 SETTINGS = ['apikey', 'secret', 'installid']
 
 def signed_rest_call(function, parameters, secret):
@@ -255,6 +262,18 @@ class Karotz(object):
         rest_call('led', {'action': 'light',
                           'color': color,
                           'interactiveid': self.interactiveId})
+
+    def tts(self, action='speak', text="", lang=ENGLISH):
+        rest_call('tts', {'action': action,
+                          'lang': lang,
+                          'text': text,
+                          'interactiveid': self.interactiveId})
+
+    def say(self, text, lang=ENGLISH):
+        self.tts(text=text, lang=lang)
+
+    def mute(self):
+        self.tts(action='stop')
 
     def demo_led(self):
         for color in COLORS:
