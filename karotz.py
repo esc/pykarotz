@@ -228,10 +228,10 @@ class Karotz(object):
         self.stop()
 
     def start(self):
-        parameters = {'apikey': self.settings['apikey'],
-                      'installid': self.settings['installid']}
-        parameters['once'] = "%d" % random.randint(100000000, 99999999999)
-        parameters['timestamp'] = "%d" % time.time()
+        parameters = {'apikey':    self.settings['apikey'],
+                      'installid': self.settings['installid'],
+                      'once':      str(random.randint(100000000, 99999999999)),
+                      'timestamp': str(int(time.time()))}
         file_like = urllib.urlopen(signed_rest_call('start',
                                    parameters,
                                    self.settings['secret']))
