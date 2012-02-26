@@ -179,6 +179,31 @@ class KarotzResponseError(Exception):
 
 
 class Karotz(object):
+    """ The main class of pykarotz
+
+    Parameters
+    ----------
+    settings : dict (None)
+        the settings, values for 'apikey', 'secret' and 'installid'
+        if None, the default config file will be searched
+    start : boolean
+        if True, start() will be called from the constructor
+
+    Attributes
+    ----------
+    settings : dict
+        the settings, values for 'apikey', 'secret' and 'installid'
+    interactiveId : str
+        the interactiveId, when connected
+    access : list of str
+        the functions that the installed application has access to
+
+    Examples
+    --------
+    >>> krtz = Karotz()
+    >>> krtz.demo_led()
+
+    """
 
     def __init__(self, settings=None, start=True):
         # if no settings given, search in the default location
