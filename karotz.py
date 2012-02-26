@@ -213,6 +213,7 @@ class Karotz(object):
             assert setting in settings
         self.settings = settings
         self.interactiveId = None
+        self.access = None
         if start:
             self.start()
 
