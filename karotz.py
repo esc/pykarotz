@@ -275,7 +275,11 @@ class Karotz(object):
     def mute(self):
         self.tts(action='stop')
 
+    def config(self):
+        rest_call('config', {'interactiveid': self.interactiveId})
+
     def demo_led(self):
         for color in COLORS:
             self.led_light(color=color)
             time.sleep(1)
+
