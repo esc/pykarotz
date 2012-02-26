@@ -210,7 +210,7 @@ class Karotz(object):
         if settings is None:
             settings = parse_config()
         for setting in SETTINGS:
-            assert settings.has_key(setting)
+            assert setting in settings
         self.settings = settings
         self.interactiveId = None
         if start:
