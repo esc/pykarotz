@@ -225,7 +225,7 @@ class Karotz(object):
             self.start()
 
     def __del__(self):
-        if self.interactiveid:
+        if self.interactiveId:
             self.stop()
 
     def start(self):
