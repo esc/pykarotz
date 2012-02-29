@@ -225,7 +225,8 @@ class Karotz(object):
             self.start()
 
     def __del__(self):
-        self.stop()
+        if self.interactiveid:
+            self.stop()
 
     def start(self):
         parameters = {'apikey':    self.settings['apikey'],
