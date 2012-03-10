@@ -272,7 +272,7 @@ class Karotz(object):
     def happy(self):
         self.ears(left=-2, right=-2, relative=False)
 
-    def led_light(self, color='FFFFFF'):
+    def led_light(self, color=RED):
         rest_call('led', {'action': 'light',
                           'color': color,
                           'interactiveid': self.interactiveId})
