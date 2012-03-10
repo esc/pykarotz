@@ -246,6 +246,10 @@ class Karotz(object):
                                       'interactiveid': self.interactiveId})
         self.interactiveId = None
 
+    def restart(self):
+        self.stop()
+        self.start()
+
     def ears(self, left=0, right=0, relative=True, reset=False):
         rest_call('ears', {'left': left,
                            'right' : right,
