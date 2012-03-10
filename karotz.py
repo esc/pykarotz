@@ -277,6 +277,9 @@ class Karotz(object):
                           'color': color,
                           'interactiveid': self.interactiveId})
 
+    def led_off(self):
+        self.led_light(color=OFF)
+
     def tts(self, action='speak', text="", lang=ENGLISH):
         rest_call('tts', {'action': action,
                           'lang': lang,
