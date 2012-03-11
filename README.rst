@@ -73,6 +73,8 @@ something like:
     >>> settings['secret'] = "23426660-beef-beee-baad-food0000babe"
     >>> krtz = kz.Karotz(settings=settings)
 
+See the directory ``examples`` for some example applications.
+
 Testing
 -------
 
