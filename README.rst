@@ -88,6 +88,13 @@ Similar Projects
 * `Ruby <https://github.com/phoet/karotz>`_
 * `Php <http://wizz.cc/blog/index.php?post/2011/04/12/Karotz-Php-Class>`_
 
+Links
+-----
+
+* `Developer Pages (APIs etc..) <http://dev.karotz.com/>`_
+* `Google group 'KarotzDev' <http://groups.google.com/group/karotzdev>`_
+* `Karotz Wiki <http://wiki.karotz.com/index.php/Main_Page>`_
+
 
 Author, Copyright and License
 -----------------------------
