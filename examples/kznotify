@@ -29,7 +29,7 @@ $ PYTHONPATH=. examples/kznotify hallo, hallo, dies ist ein Test
 # both the executable and the pykarotz library)
 $ echo "PYTHONPATH=$HOME/git-working/pykarotz \
         $HOME/git-working/pykarotz/examples/kznotify \
-        deine Wäsche ist fertig" | at now + 1 min
+        deine Wäsche ist fertig" | at now + 45 min
 """
 
 from __future__ import division
