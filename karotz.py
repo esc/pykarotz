@@ -144,13 +144,16 @@ def unmarshall_voomsg(token):
         unmarshalled[field] = parsed.find(field).text
     return unmarshalled
 
-def parse_config(section="karotz-app-settings", config_filename=None):
+def parse_config(section='karotz-app-settings', config_filename=None):
     """ Parse a configuration file with app settings.
 
     Parameters
     ----------
+    section : str
+        the name of the config section where to look for settings
+        (default: 'karotz-app-settings')
     config_filename : str
-        the name of the config file
+        the path to and name of the config file
 
     Returns
     -------
@@ -162,7 +165,7 @@ def parse_config(section="karotz-app-settings", config_filename=None):
     IOError:
         if config_filename does not exist
     NoSectionError
-        if no section 'karotz-app-settings' exists
+        if no section with name 'section' exists
     NoOptionError
         if any one of 'apikey', 'secret' and 'installid' does not exist
 
