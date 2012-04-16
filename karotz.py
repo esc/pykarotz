@@ -182,7 +182,7 @@ class Karotz(object):
     settings : dict
         the settings, values for 'apikey', 'secret' and 'installid'
     interactive_id : str
-        the interactive_id, when connected
+        the interactive_id, when connected, None when not
     access : list of str
         the functions that the installed application has access to
 
