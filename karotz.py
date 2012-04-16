@@ -68,28 +68,6 @@ def assemble_rest_call(function, parameters):
     query = urllib.urlencode(sorted(parameters.items()))
     return "%s%s?%s" % (BASE_URL, function, query)
 
-def rest_call(function, parameters):
-    """ Make a rest call.
-
-    Will assemble the url and make the call. Does not return anything, but
-    raises KarotzResponseError if the call was not OK or no response is
-    received.
-
-    Parameters
-    ----------
-    function : str
-        the api function to execute
-    parameters : dict
-        the parameters to use in the call
-
-    Raises
-    ------
-    KarotzResponseError
-        if the call was unsucessful
-
-    """
-    file_like = urllib.urlopen(assemble_rest_call(function, parameters))
-    unmarshall_voomsg(file_like.read())
 
 def unmarshall_start_voomsg(token):
     parsed = le.fromstring(token)
@@ -231,6 +209,30 @@ class Karotz(object):
         if self.interactiveId:
             self.stop()
 
+    def _rest_call(self, function, parameters):
+        """ Make a rest call.
+
+        Will assemble the url and make the call. Does not return anything, but
+        raises KarotzResponseError if the call was not OK or no response is
+        received.
+
+        Parameters
+        ----------
+        function : str
+            the api function to execute
+        parameters : dict
+            the parameters to use in the call
+
+        Raises
+        ------
+        KarotzResponseError
+            if the call was unsucessful
+
+        """
+        parameters['interactiveid'] = self.interactiveId
+        file_like = urllib.urlopen(assemble_rest_call(function, parameters))
+        unmarshall_voomsg(file_like.read())
+
     def start(self):
         parameters = {'apikey':    self.settings['apikey'],
                       'installid': self.settings['installid'],
@@ -245,20 +247,19 @@ class Karotz(object):
         self.access = unmarshalled["access"]
 
     def stop(self):
-        rest_call('interactivemode', {'action': 'stop',
-                                      'interactiveid': self.interactiveId})
-        self.interactiveId = None
+        if self.interactiveId:
+            self._rest_call('interactivemode', {'action': 'stop'})
+            self.interactiveId = None
 
     def restart(self):
         self.stop()
         self.start()
 
     def ears(self, left=0, right=0, relative=True, reset=False):
-        rest_call('ears', {'left': left,
+        self._rest_call('ears', {'left': left,
                            'right' : right,
                            'relative' : relative,
-                           'reset' : reset,
-                           'interactiveid': self.interactiveId})
+                           'reset' : reset})
 
     def reset_ears(self):
         self.ears(reset=True)
@@ -276,11 +277,10 @@ class Karotz(object):
         self.ears(left=-2, right=-2, relative=False)
 
     def led(self, action='light', color=RED, period=500, pulse=3000):
-        rest_call('led', {'action': action,
+        self._rest_call('led', {'action': action,
                           'color': color,
                           'period': period,
-                          'pulse': pulse,
-                          'interactiveid': self.interactiveId})
+                          'pulse': pulse})
 
     def led_pulse(self, color=RED, period=500, pulse=3000):
         self.led(action='pulse', color=color, period=period, pulse=pulse)
@@ -295,10 +295,9 @@ class Karotz(object):
         self.led_light(color=OFF)
 
     def tts(self, action='speak', text="", lang=ENGLISH):
-        rest_call('tts', {'action': action,
+        self._rest_call('tts', {'action': action,
                           'lang': lang,
-                          'text': text,
-                          'interactiveid': self.interactiveId})
+                          'text': text})
 
     def say(self, text, lang=ENGLISH):
         self.tts(text=text, lang=lang)
