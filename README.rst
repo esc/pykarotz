@@ -50,7 +50,7 @@ is to place the configuration in the file ``$HOME/.pykarotz``, for example::
     installid = 23426660-beef-beee-baad-food0000babe
 
 If you have done everything correctly, you can establish a connection and demo
-the available colors from an interactive Python prompt using:
+the available colors from an interactive Python prompt using::
 
     >>> import karotz as kz
     >>> krtz = kz.Karotz()
@@ -58,14 +58,14 @@ the available colors from an interactive Python prompt using:
     >>> krtz.stop()
 
 In case you have placed the file somewhere else, for example
-``C:\pykarotz.txt``, you can initialise the ``Karotz`` class using:
+``C:\pykarotz.txt``, you can initialise the ``Karotz`` class using::
 
     >>> import karotz as kz
     >>> settings = kz.parse_config(config_filename="C:\pykarotz.txt")
     >>> krtz = kz.Karotz(settings=settings)
 
 If instead, you want to hardcode the settings in your Python file, you can do
-something like:
+something like::
 
     >>> import karotz as kz
     >>> settings['apikey'] = "23426660-beef-beee-baad-food0000babe"
@@ -73,7 +73,11 @@ something like:
     >>> settings['secret'] = "23426660-beef-beee-baad-food0000babe"
     >>> krtz = kz.Karotz(settings=settings)
 
-See the directory ``examples`` for some example applications.
+See the directory ``examples`` for some example applications.:
+
+* ``examples/kznotify``: Command line notification
+
+* ``examples/kzambient``: Ambient light source
 
 Testing
 -------
