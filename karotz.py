@@ -275,23 +275,21 @@ class Karotz(object):
     def happy(self):
         self.ears(left=-2, right=-2, relative=False)
 
-    def led_pulse(self, color=RED, period=500, pulse=3000):
-        rest_call('led', {'action': 'pulse',
+    def led(self, action='light', color=RED, period=500, pulse=3000):
+        rest_call('led', {'action': action,
                           'color': color,
                           'period': period,
                           'pulse': pulse,
                           'interactiveid': self.interactiveId})
 
+    def led_pulse(self, color=RED, period=500, pulse=3000):
+        self.led(action='pulse', color=color, period=period, pulse=pulse)
+
     def led_fade(self, color=RED, period=3000):
-        rest_call('led', {'action': 'fade',
-                          'color': color,
-                          'period': period,
-                          'interactiveid': self.interactiveId})
+        self.led(action='fade', color=color, period=period)
 
     def led_light(self, color=RED):
-        rest_call('led', {'action': 'light',
-                          'color': color,
-                          'interactiveid': self.interactiveId})
+        self.led(action='light', color=color)
 
     def led_off(self):
         self.led_light(color=OFF)
