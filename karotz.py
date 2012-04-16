@@ -256,10 +256,12 @@ class Karotz(object):
         self.start()
 
     def ears(self, left=0, right=0, relative=True, reset=False):
-        self._rest_call('ears', {'left': left,
-                           'right' : right,
-                           'relative' : relative,
-                           'reset' : reset})
+        self._rest_call('ears',
+                {'left': left,
+                 'right' : right,
+                 'relative' : relative,
+                 'reset' : reset,
+                })
 
     def reset_ears(self):
         self.ears(reset=True)
@@ -277,10 +279,12 @@ class Karotz(object):
         self.ears(left=-2, right=-2, relative=False)
 
     def led(self, action='light', color=RED, period=500, pulse=3000):
-        self._rest_call('led', {'action': action,
-                          'color': color,
-                          'period': period,
-                          'pulse': pulse})
+        self._rest_call('led',
+                {'action': action,
+                 'color': color,
+                 'period': period,
+                 'pulse': pulse,
+                })
 
     def led_pulse(self, color=RED, period=500, pulse=3000):
         self.led(action='pulse', color=color, period=period, pulse=pulse)
@@ -295,9 +299,11 @@ class Karotz(object):
         self.led_light(color=OFF)
 
     def tts(self, action='speak', text="", lang=ENGLISH):
-        self._rest_call('tts', {'action': action,
-                          'lang': lang,
-                          'text': text})
+        self._rest_call('tts',
+                {'action': action,
+                 'lang': lang,
+                 'text': text,
+                })
 
     def say(self, text, lang=ENGLISH):
         self.tts(text=text, lang=lang)
