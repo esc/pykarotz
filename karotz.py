@@ -307,6 +307,7 @@ class Karotz(object):
         self.tts(action='stop')
 
     def demo_led(self):
+        period=5000
         for color in COLORS:
-            self.led_light(color=color)
-            time.sleep(1)
+            self.led_fade(color=color, period=period)
+            time.sleep(period/1000)
