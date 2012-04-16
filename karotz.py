@@ -181,8 +181,8 @@ class Karotz(object):
     ----------
     settings : dict
         the settings, values for 'apikey', 'secret' and 'installid'
-    interactiveId : str
-        the interactiveId, when connected
+    interactive_id : str
+        the interactive_id, when connected
     access : list of str
         the functions that the installed application has access to
 
@@ -200,14 +200,13 @@ class Karotz(object):
         for setting in SETTINGS:
             assert setting in settings
         self.settings = settings
-        self.interactiveId = None
+        self.interactive_id = None
         self.access = None
         if start:
             self.start()
 
     def __del__(self):
-        if self.interactiveId:
-            self.stop()
+        self.stop()
 
     def _rest_call(self, function, parameters):
         """ Make a rest call.
@@ -229,7 +228,7 @@ class Karotz(object):
             if the call was unsucessful
 
         """
-        parameters['interactiveid'] = self.interactiveId
+        parameters['interactiveid'] = self.interactive_id
         file_like = urllib.urlopen(assemble_rest_call(function, parameters))
         unmarshall_voomsg(file_like.read())
 
@@ -243,13 +242,13 @@ class Karotz(object):
                                    self.settings['secret']))
         # should return an hex string if auth is ok, error 500 if not
         unmarshalled = unmarshall_start_voomsg(file_like.read())
-        self.interactiveId = unmarshalled["interactiveId"]
+        self.interactive_id = unmarshalled["interactiveId"]
         self.access = unmarshalled["access"]
 
     def stop(self):
-        if self.interactiveId:
+        if self.interactive_id:
             self._rest_call('interactivemode', {'action': 'stop'})
-            self.interactiveId = None
+            self.interactive_id = None
 
     def restart(self):
         self.stop()
