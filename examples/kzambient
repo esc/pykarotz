@@ -21,5 +21,5 @@ periods = [i*1000 for i in range(1, 10)]
 while True:
     color = random.choice(kz.COLORS[1:])
     period = random.choice(periods)
-    k.led_fade(color=color, period=period)
+    k.led.fade(color=color, period=period)
     time.sleep(period/1000)
