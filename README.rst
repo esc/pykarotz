@@ -40,9 +40,10 @@ First, you must register an interactive application and install this on the
 target Karotz. For now, you can find some great instructions on the `Ruby API
 blog-post <http://blog.nofail.de/2011/12/karotz-ruby-love/>`_.
 
-After doing this, you will have an ``INSTALL_ID``, ``API_KEY`` and a
-``SECRET``. You have several ways to use these with ``pykarotz``. The easiest
-is to place the configuration in the file ``$HOME/.pykarotz``, for example::
+After doing this, you will have the access credentials ``INSTALL_ID``,
+``API_KEY`` and a ``SECRET``. You have several ways to use these with
+``pykarotz``. The easiest is to place the configuration in a configuration file
+(standard INI format) in your home directory ``$HOME/.pykarotz``, for example::
 
     [karotz-app-settings]
     apikey = 23426660-beef-beee-baad-food0000babe
@@ -57,22 +58,22 @@ the available colors from an interactive Python prompt using::
     >>> krtz.demo_led()
     >>> krtz.stop()
 
-In case you have placed the file somewhere else, for example
-``C:\pykarotz.txt``, you can initialise the ``Karotz`` class using::
+In case you have placed the file somewhere else, for example if you are using
+Windows and have placed the file at ``C:\pykarotz.txt``, you can initialise the
+``Karotz`` class using::
 
     >>> import karotz as kz
     >>> settings = kz.parse_config(config_filename="C:\pykarotz.txt")
     >>> krtz = kz.Karotz(settings=settings)
 
-If instead, you want to hardcode the settings in your Python file, you can do
-something like::
+If instead, you want to hardcode the settings in your Python source file, you
+can do something like::
 
     >>> import karotz as kz
     >>> settings['apikey'] = "23426660-beef-beee-baad-food0000babe"
     >>> settings['installid'] = "23426660-beef-beee-baad-food0000babe"
     >>> settings['secret'] = "23426660-beef-beee-baad-food0000babe"
     >>> krtz = kz.Karotz(settings=settings)
-
 
 Examples
 --------
