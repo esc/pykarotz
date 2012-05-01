@@ -203,6 +203,7 @@ class Karotz(object):
         self.interactive_id = None
         self.access = None
         self.ears = Karotz.Ears(self)
+        self.led = Karotz.Led(self)
         if start:
             self.start()
 
@@ -273,6 +274,44 @@ class Karotz(object):
             """ Spin left ear anticlockwise, right ear anticlockwise. """
             self(left=17, right=-17)
 
+    class Led(object):
+        """ Karotz' led.
+
+        Parameters
+        ----------
+        _karotz : Karotz
+            a karotz instance
+
+        """
+        def __init__(self, _karotz):
+            self._karotz = _karotz
+
+        def __call__(self, action='light', color=RED, period=500, pulse=3000):
+            self._karotz._rest_call('led',
+                    {'action': action,
+                    'color': color,
+                    'period': period,
+                    'pulse': pulse,
+                    })
+
+        def pulse(self, color=RED, period=500, pulse=3000):
+            self(action='pulse', color=color, period=period, pulse=pulse)
+
+        def fade(self, color=RED, period=3000):
+            self(action='fade', color=color, period=period)
+
+        def light(self, color=RED):
+            self(action='light', color=color)
+
+        def off(self):
+            self(color=OFF)
+
+        def demo(self):
+            period=5000
+            for color in COLORS:
+                self.fade(color=color, period=period)
+                time.sleep(period/1000)
+
     def start(self):
         parameters = {'apikey':    self.settings['apikey'],
                       'installid': self.settings['installid'],
@@ -295,25 +334,6 @@ class Karotz(object):
         self.stop()
         self.start()
 
-    def led(self, action='light', color=RED, period=500, pulse=3000):
-        self._rest_call('led',
-                {'action': action,
-                 'color': color,
-                 'period': period,
-                 'pulse': pulse,
-                })
-
-    def led_pulse(self, color=RED, period=500, pulse=3000):
-        self.led(action='pulse', color=color, period=period, pulse=pulse)
-
-    def led_fade(self, color=RED, period=3000):
-        self.led(action='fade', color=color, period=period)
-
-    def led_light(self, color=RED):
-        self.led(action='light', color=color)
-
-    def led_off(self):
-        self.led_light(color=OFF)
 
     def tts(self, action='speak', text="", lang=ENGLISH):
         self._rest_call('tts',
@@ -328,8 +348,3 @@ class Karotz(object):
     def mute(self):
         self.tts(action='stop')
 
-    def demo_led(self):
-        period=5000
-        for color in COLORS:
-            self.led_fade(color=color, period=period)
-            time.sleep(period/1000)
