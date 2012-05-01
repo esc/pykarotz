@@ -189,7 +189,7 @@ class Karotz(object):
     Examples
     --------
     >>> krtz = Karotz()
-    >>> krtz.demo_led()
+    >>> krtz.led.demo()
 
     """
 

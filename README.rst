@@ -55,7 +55,7 @@ the available colors from an interactive Python prompt using::
 
     >>> import karotz as kz
     >>> krtz = kz.Karotz()
-    >>> krtz.demo_led()
+    >>> krtz.led.demo()
     >>> krtz.stop()
 
 In case you have placed the file somewhere else, for example if you are using
