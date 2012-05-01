@@ -92,6 +92,25 @@ And then use the keyword argument `section` to load them::
     >>> krtz1 = kz.Karotz(kz.parse_config(section='karotz-one'))
     >>> krtz2 = kz.Karotz(kz.parse_config(section='karotz-two'))
 
+API
+---
+
+Currently the following REST API calls are supported:
+
+* Ears
+* Led
+* TTS
+
+You can access them in an object oriented fashion using ``kz.ears``, ``kz.led``
+and ``kz.tts``::
+
+    >>> import karotz as kz
+    >>> krtz = kz.Karotz()
+    >>> krtz.ears.sad()
+    >>> krtz.led.light(kz.PURPLE)
+    >>> krtz.tts.speak('Why is the world so evil?')
+    >>> krtz.stop()
+
 Examples
 --------
 
