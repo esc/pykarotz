@@ -204,6 +204,7 @@ class Karotz(object):
         self.access = None
         self.ears = Karotz.Ears(self)
         self.led = Karotz.Led(self)
+        self.tts = Karotz.TTS(self)
         if start:
             self.start()
 
@@ -361,6 +362,31 @@ class Karotz(object):
                 self.fade(color=color, period=period)
                 time.sleep(period/1000)
 
+    class TTS(object):
+        """ Karotz' text to speech (tts).
+
+        Parameters
+        ----------
+        _karotz : Karotz
+            a karotz instance
+
+        """
+        def __init__(self, _karotz):
+            self._karotz = _karotz
+
+        def __call__(self, action='speak', text="", lang=ENGLISH):
+            self._karotz._rest_call('tts',
+                    {'action': action,
+                    'lang': lang,
+                    'text': text,
+                    })
+
+        def say(self, text, lang=ENGLISH):
+            self(text=text, lang=lang)
+
+        def mute(self):
+            self(action='stop')
+
     def start(self):
         parameters = {'apikey':    self.settings['apikey'],
                       'installid': self.settings['installid'],
@@ -382,18 +408,4 @@ class Karotz(object):
     def restart(self):
         self.stop()
         self.start()
-
-
-    def tts(self, action='speak', text="", lang=ENGLISH):
-        self._rest_call('tts',
-                {'action': action,
-                 'lang': lang,
-                 'text': text,
-                })
-
-    def say(self, text, lang=ENGLISH):
-        self.tts(text=text, lang=lang)
-
-    def mute(self):
-        self.tts(action='stop')
 
