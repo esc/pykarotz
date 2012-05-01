@@ -253,6 +253,19 @@ class Karotz(object):
                     'relative' : relative,
                     'reset' : reset,
                     })
+        def move(self, left=0, right=0, relative=True):
+            """ Move the ears.
+
+            Parameters
+            ----------
+            left : int
+                number of slots to move left ear
+            right : int
+                number of slots to move right ear
+            relative : bool
+                is movement to be relative to current position
+            """
+            self(left=left, right=right, relative=relative)
 
         def reset(self):
             """ Reset the ears to the base position. """
