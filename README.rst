@@ -75,6 +75,23 @@ can do something like::
     >>> settings['secret'] = "23426660-beef-beee-baad-food0000babe"
     >>> krtz = kz.Karotz(settings=settings)
 
+If you have multiple units, you can save their settings in different sections::
+
+    [karotz-one]
+    apikey = 23426660-beef-beee-baad-food0000babe
+    secret = 23426660-beef-beee-baad-food0000babe
+    installid = 23426660-beef-beee-baad-food0000babe
+    [karotz-two]
+    apikey = 23426660-beef-beee-baad-food0000babe
+    secret = 23426660-beef-beee-baad-food0000babe
+    installid = 23426660-beef-beee-baad-food0000babe
+
+And then use the keyword argument `section` to load them::
+
+    >>> import karotz as kz
+    >>> krtz1 = kz.Karotz(kz.parse_config(section='karotz-one'))
+    >>> krtz2 = kz.Karotz(kz.parse_config(section='karotz-two'))
+
 Examples
 --------
 
