@@ -254,20 +254,24 @@ class Karotz(object):
                     })
 
         def reset(self):
+            """ Reset the ears to the base position. """
             self(reset=True)
 
         def sad(self):
+            """ Ears down. """
             self(left=5, right=5, relative=False)
 
         def happy(self):
+            """ Ears up. """
             self(left=-2, right=-2, relative=False)
 
         def spin_ca(self):
+            """ Spin left ear clockwise, right ear anticlockwise. """
             self(left=-17, right=17)
 
         def spin_ac(self):
+            """ Spin left ear anticlockwise, right ear anticlockwise. """
             self(left=17, right=-17)
-
 
     def start(self):
         parameters = {'apikey':    self.settings['apikey'],
