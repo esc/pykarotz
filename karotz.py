@@ -381,7 +381,7 @@ class Karotz(object):
                     'text': text,
                     })
 
-        def say(self, text, lang=ENGLISH):
+        def speak(self, text, lang=ENGLISH):
             """ Say something.
 
             Parameters
@@ -393,7 +393,7 @@ class Karotz(object):
             """
             self(text=text, lang=lang)
 
-        def mute(self):
+        def stop(self):
             """ Interrupt the currently spoken words. """
             self(action='stop')
 
