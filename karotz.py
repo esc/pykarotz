@@ -295,18 +295,54 @@ class Karotz(object):
                     })
 
         def pulse(self, color=RED, period=500, pulse=3000):
+            """ Pulse the led.
+
+            Will pulse the led from current color to target color and back
+            again.
+
+            Parameters
+            ----------
+            color : string
+                hex color, like karotz.COLORS
+            period : int
+                half a period in ms
+            pulse : int
+                the total duration in ms
+            """
             self(action='pulse', color=color, period=period, pulse=pulse)
 
         def fade(self, color=RED, period=3000):
+            """ Fade the led.
+
+            Will fade the led from current color to target color.
+
+            Parameters
+            ----------
+            color : string
+                hex color, like karotz.COLORS
+            period : int
+                time to fade
+            """
             self(action='fade', color=color, period=period)
 
         def light(self, color=RED):
+            """ Set the led to a given color.
+
+            Will fade the led from current color to target color.
+
+            Parameters
+            ----------
+            color : string
+                hex color, like karotz.COLORS
+            """
             self(action='light', color=color)
 
         def off(self):
+            """ Turn the led off. """
             self(color=OFF)
 
         def demo(self):
+            """ Fade through the available colors. """
             period=5000
             for color in COLORS:
                 self.fade(color=color, period=period)
