@@ -73,11 +73,17 @@ something like::
     >>> settings['secret'] = "23426660-beef-beee-baad-food0000babe"
     >>> krtz = kz.Karotz(settings=settings)
 
+
+Examples
+--------
+
 See the directory ``examples`` for some example applications.:
 
 * ``examples/kznotify``: Command line notification
+  (`Direct link via GitHub <https://github.com/esc/pykarotz/blob/master/examples/kznotify>`_)
 
 * ``examples/kzambient``: Ambient light source
+  (`Direct link via GitHub <https://github.com/esc/pykarotz/blob/master/examples/kzambient>`_ )
 
 Testing
 -------
