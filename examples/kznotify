@@ -39,7 +39,7 @@ import karotz as kz
 
 k = kz.Karotz()
 message = " ".join(sys.argv[1:])
-k.say(message, lang=kz.GERMAN)
+k.tts.speak(message, lang=kz.GERMAN)
 # wait for the message to complete
 time.sleep(len(sys.argv)/2)
 k.stop()
