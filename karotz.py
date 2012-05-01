@@ -202,6 +202,7 @@ class Karotz(object):
         self.settings = settings
         self.interactive_id = None
         self.access = None
+        self.ears = Karotz.Ears(self)
         if start:
             self.start()
 
@@ -232,6 +233,42 @@ class Karotz(object):
         file_like = urllib.urlopen(assemble_rest_call(function, parameters))
         unmarshall_voomsg(file_like.read())
 
+    class Ears(object):
+        """ Karotz' ears.
+
+        Parameters
+        ----------
+        _karotz : Karotz
+            a karotz instance
+
+        """
+        def __init__(self, _karotz):
+            self._karotz = _karotz
+
+        def __call__(self, left=0, right=0, relative=True, reset=False):
+            self._karotz._rest_call('ears',
+                    {'left': left,
+                    'right' : right,
+                    'relative' : relative,
+                    'reset' : reset,
+                    })
+
+        def reset(self):
+            self(reset=True)
+
+        def sad(self):
+            self(left=5, right=5, relative=False)
+
+        def happy(self):
+            self(left=-2, right=-2, relative=False)
+
+        def spin_ca(self):
+            self(left=-17, right=17)
+
+        def spin_ac(self):
+            self(left=17, right=-17)
+
+
     def start(self):
         parameters = {'apikey':    self.settings['apikey'],
                       'installid': self.settings['installid'],
@@ -253,29 +290,6 @@ class Karotz(object):
     def restart(self):
         self.stop()
         self.start()
-
-    def ears(self, left=0, right=0, relative=True, reset=False):
-        self._rest_call('ears',
-                {'left': left,
-                 'right' : right,
-                 'relative' : relative,
-                 'reset' : reset,
-                })
-
-    def reset_ears(self):
-        self.ears(reset=True)
-
-    def sad(self):
-        self.ears(left=5, right=5, relative=False)
-
-    def spin_ca(self):
-        self.ears(left=-17, right=17)
-
-    def spin_ac(self):
-        self.ears(left=17, right=-17)
-
-    def happy(self):
-        self.ears(left=-2, right=-2, relative=False)
 
     def led(self, action='light', color=RED, period=500, pulse=3000):
         self._rest_call('led',
