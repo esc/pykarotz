@@ -33,8 +33,8 @@ Installation
 
 Place the ``karotz.py`` file where you want to use it.
 
-Usage
------
+Getting Started
+---------------
 
 First, you must register an interactive application and install this on the
 target Karotz. For now, you can find some great instructions on the `Ruby API
