@@ -382,9 +382,19 @@ class Karotz(object):
                     })
 
         def say(self, text, lang=ENGLISH):
+            """ Say something.
+
+            Parameters
+            ----------
+            text : string
+                the text to say
+            lang : str
+                the language to use, one of kz.LANGUAGES
+            """
             self(text=text, lang=lang)
 
         def mute(self):
+            """ Interrupt the currently spoken words. """
             self(action='stop')
 
     def start(self):
