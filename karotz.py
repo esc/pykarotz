@@ -12,7 +12,7 @@ import base64
 import lxml.etree as le
 import ConfigParser
 
-__version__ = "0.1.0-dev"
+__version__ = "0.1.0"
 __author__ = "Valentin 'esc' Haenel <valentin.haenel@gmx.de>"
 __docformat__ = "restructuredtext en"
 
