@@ -209,7 +209,7 @@ class Karotz(object):
             self.start()
 
     def __del__(self):
-        self.stop()
+        self._rest_call('interactivemode', {'action': 'stop'})
 
     def _rest_call(self, function, parameters):
         """ Make a rest call.
