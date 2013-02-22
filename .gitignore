@@ -1,0 +1,8 @@
+# Ignore egg buid structure
+src/dist/
+src/pykarotz.egg-info/
+# Pydev files
+.project
+.pydevproject
+#
+*.pyc

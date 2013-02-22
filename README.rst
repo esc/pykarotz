@@ -32,6 +32,7 @@ Installation
 ------------
 
 Place the ``karotz.py`` file where you want to use it.
+egg in progress
 
 Getting Started
 ---------------
@@ -100,6 +101,9 @@ Currently the following REST API calls are supported:
 * Ears
 * Led
 * TTS
+* Config
+* Mutimedia
+* Video
 
 You can access them in an object oriented fashion using ``kz.ears``, ``kz.led``
 and ``kz.tts``::

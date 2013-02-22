@@ -11,9 +11,10 @@ import hashlib
 import base64
 import lxml.etree as le
 import ConfigParser
+from lxml import objectify
 
-__version__ = "0.1.0"
-__author__ = "Valentin 'esc' Haenel <valentin.haenel@gmx.de>"
+__version__ = "0.2.0"
+__author__ = "Valentin 'esc' Haenel <valentin.haenel@gmx.de> - Franck Roudet"
 __docformat__ = "restructuredtext en"
 
 BASE_URL = 'http://api.karotz.com/api/karotz/'
@@ -176,6 +177,8 @@ class Karotz(object):
         if None, the default config file will be searched
     start : boolean
         if True, start() will be called from the constructor
+    proxies : dict (None)
+        dict for proxies (see urllib.open)
 
     Attributes
     ----------
@@ -193,24 +196,45 @@ class Karotz(object):
 
     """
 
-    def __init__(self, settings=None, start=True):
+    def __init__(self, settings=None, start=True, proxies=None):
         # if no settings given, search in the default location
         if settings is None:
             settings = parse_config()
         for setting in SETTINGS:
             assert setting in settings
         self.settings = settings
+        self.proxies=proxies
         self.interactive_id = None
         self.access = None
         self.ears = Karotz.Ears(self)
         self.led = Karotz.Led(self)
         self.tts = Karotz.TTS(self)
+        self.config = Karotz.Config(self)
+        self.webcam = Karotz.Webcam(self)
+        self.multimedia = Karotz.Multimedia(self)
         if start:
             self.start()
 
     def __del__(self):
         self._rest_call('interactivemode', {'action': 'stop'})
 
+    def _basic_rest_call(self, function, parameters):
+        """ Make a rest call.
+
+        Will assemble the url and make the call. Return hte body
+
+        Parameters
+        ----------
+        function : str
+            the api function to execute
+        parameters : dict
+            the parameters to use in the call
+
+        """
+        parameters['interactiveid'] = self.interactive_id
+        file_like = urllib.urlopen(assemble_rest_call(function, parameters), proxies=self.proxies)
+        return file_like.read()
+    
     def _rest_call(self, function, parameters):
         """ Make a rest call.
 
@@ -225,15 +249,19 @@ class Karotz(object):
         parameters : dict
             the parameters to use in the call
 
+        Returns
+        -------
+        unmarshalled : dict
+            dictionary containing 'code', 'id' 'correlationId' and 'interactiveId'
+
         Raises
         ------
         KarotzResponseError
             if the call was unsucessful
 
         """
-        parameters['interactiveid'] = self.interactive_id
-        file_like = urllib.urlopen(assemble_rest_call(function, parameters))
-        unmarshall_voomsg(file_like.read())
+        file_like = self._basic_rest_call(function, parameters)
+        return unmarshall_voomsg(file_like)
 
     class Ears(object):
         """ Karotz' ears.
@@ -248,7 +276,7 @@ class Karotz(object):
             self._karotz = _karotz
 
         def __call__(self, left=0, right=0, relative=True, reset=False):
-            self._karotz._rest_call('ears',
+            return self._karotz._rest_call('ears',
                     {'left': left,
                     'right' : right,
                     'relative' : relative,
@@ -266,27 +294,28 @@ class Karotz(object):
             relative : bool
                 is movement to be relative to current position
             """
-            self(left=left, right=right, relative=relative)
+            return self(left=left, right=right, relative=relative)
 
         def reset(self):
             """ Reset the ears to the base position. """
-            self(reset=True)
+            return self(reset=True)
 
         def sad(self):
             """ Ears down. """
-            self(left=5, right=5, relative=False)
+            return self(left=5, right=5, relative=False)
 
         def happy(self):
             """ Ears up. """
-            self(left=-2, right=-2, relative=False)
+            return self(left=-2, right=-2, relative=False)
 
         def spin_ca(self):
             """ Spin left ear clockwise, right ear anticlockwise. """
-            self(left=-17, right=17)
+            return self(left=-17, right=17)
 
+			
         def spin_ac(self):
             """ Spin left ear anticlockwise, right ear anticlockwise. """
-            self(left=17, right=-17)
+            return self(left=17, right=-17)
 
     class Led(object):
         """ Karotz' led.
@@ -301,7 +330,7 @@ class Karotz(object):
             self._karotz = _karotz
 
         def __call__(self, action='light', color=RED, period=500, pulse=3000):
-            self._karotz._rest_call('led',
+            return self._karotz._rest_call('led',
                     {'action': action,
                     'color': color,
                     'period': period,
@@ -323,7 +352,7 @@ class Karotz(object):
             pulse : int
                 the total duration in ms
             """
-            self(action='pulse', color=color, period=period, pulse=pulse)
+            return self(action='pulse', color=color, period=period, pulse=pulse)
 
         def fade(self, color=RED, period=3000):
             """ Fade the led.
@@ -337,7 +366,7 @@ class Karotz(object):
             period : int
                 time to fade
             """
-            self(action='fade', color=color, period=period)
+            return self(action='fade', color=color, period=period)
 
         def light(self, color=RED):
             """ Set the led to a given color.
@@ -349,11 +378,11 @@ class Karotz(object):
             color : string
                 hex color, like karotz.COLORS
             """
-            self(action='light', color=color)
+            return self(action='light', color=color)
 
         def off(self):
             """ Turn the led off. """
-            self(color=OFF)
+            return self(color=OFF)
 
         def demo(self):
             """ Fade through the available colors. """
@@ -375,7 +404,7 @@ class Karotz(object):
             self._karotz = _karotz
 
         def __call__(self, action='speak', text="", lang=ENGLISH):
-            self._karotz._rest_call('tts',
+            return self._karotz._rest_call('tts',
                     {'action': action,
                     'lang': lang,
                     'text': text,
@@ -391,22 +420,119 @@ class Karotz(object):
             lang : str
                 the language to use, one of kz.LANGUAGES
             """
-            self(text=text, lang=lang)
+            return self(text=text, lang=lang)
 
         def stop(self):
             """ Interrupt the currently spoken words. """
-            self(action='stop')
+            return self(action='stop')
+
+    class Config(object):
+        """ Karotz' config.
+
+        Parameters
+        ----------
+        _karotz : Karotz
+            a karotz instance
+
+        """
+        def __init__(self, _karotz):
+            self._karotz = _karotz
+
+        def __call__(self):
+            """ Karotz' Config.
+    
+            Returns
+            -------
+              An object (lxml) that is the karotz configuration
+    
+            """
+            res = self._karotz._basic_rest_call('config', {})
+            return objectify.fromstring(res)
+            
+
+    class Webcam(object):
+        """ Karotz' Webcam.
+
+        Parameters
+        ----------
+        _karotz : Karotz
+            a karotz instance
+
+        """
+        def __init__(self, _karotz):
+            self._karotz = _karotz
+
+        def video(self):
+            """ Get the video stream.
+
+            Returns
+            -------
+                the url of the video stream
+            """
+
+            parameters = { 'interactiveid' :self._karotz.interactive_id, 'action': 'video' }
+            return assemble_rest_call('webcam', parameters)
+
+
+    class Multimedia(object):
+        """ Karotz' Multemdia.
+
+        Parameters
+        ----------
+        _karotz : Karotz
+            a karotz instance
+
+        """
+        def __init__(self, _karotz):
+            self._karotz = _karotz
+
+        def __call__(self, action, ):
+            return self._karotz._rest_call('multimedia',
+                    {'action': action,
+                     })
+            
+        def play(self,url):
+            """ Play multimedia.
+
+            Parameters
+            ----------
+                url : Media to play (mp3?)
+            """
+            return self._karotz._rest_call('multimedia',
+                    {'action': 'play',
+                     'url' : url,
+                    })
+
+        def pause(self):
+            """ Pause media.
+
+            """
+            return self('pause')
+
+        def resume(self):
+            """ Resume media.
+
+            """
+            return self('resume')
+
+        def stop(self):
+            """ Resume media.
+
+            """
+            return self('stop')
 
     def start(self):
+        print "start..."
         parameters = {'apikey':    self.settings['apikey'],
                       'installid': self.settings['installid'],
                       'once':      str(random.randint(100000000, 99999999999)),
-                      'timestamp': str(int(time.time()))}
+                      'timestamp': "%d" % time.time()}
         file_like = urllib.urlopen(signed_rest_call('start',
                                    parameters,
-                                   self.settings['secret']))
+                                   self.settings['secret']),proxies=self.proxies)
         # should return an hex string if auth is ok, error 500 if not
-        unmarshalled = unmarshall_start_voomsg(file_like.read())
+        res=file_like.read()
+        unmarshalled = unmarshall_start_voomsg(res)
         self.interactive_id = unmarshalled["interactiveId"]
         self.access = unmarshalled["access"]
 
