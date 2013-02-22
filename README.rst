@@ -146,7 +146,7 @@ Links
 Author, Copyright and License
 -----------------------------
 
-| (C) 2012 Valentin 'esc' Haenel `<esc@zetatech.org>`
+| (C) 2012 Valentin 'esc' Haenel `<esc@zetatech.org>`, Franck Roudet
 
 pykarotz is licensed under the terms of the MIT License.
 
