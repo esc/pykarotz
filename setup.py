@@ -22,9 +22,9 @@ setup (
   author = __author__ ,                                                                                                          
   author_email = '',                                                                                                         
                                                                                                                              
-  summary = 'Python karotz API',                                                               
+  description = 'karotz python API',                                                               
   url = '',                                                                                                                  
-  license = '',                                                                                                              
+  license = 'MIT License',                                                                                                              
   long_description=open('../README.rst').read(),
   package_data = {
         # include any *.conf 
@@ -37,6 +37,10 @@ setup (
     ]
   },                                                                                                                             
   # could also include long_description, download_url, classifiers, etc.                                                     
-                                                                                                                             
+  classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Topic :: Utilities",
+        "License :: OSI Approved :: MIT License",
+    ],                                                                                                                           
                                                                                                                              
 )
