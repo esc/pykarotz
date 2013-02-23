@@ -32,7 +32,7 @@ Installation
 ------------
 
 Place the ``karotz.py`` file where you want to use it.
-egg in progress
+Intallation from cheese shop: egg name pykarotz.
 
 Getting Started
 ---------------
@@ -141,7 +141,8 @@ Similar Projects
 
 Links
 -----
-
+* 
+* `Github master repository <https://github.com/esc/pykarotz>`_
 * `Developer Pages (APIs etc..) <http://dev.karotz.com/>`_
 * `Google group 'KarotzDev' <http://groups.google.com/group/karotzdev>`_
 * `Karotz Wiki <http://wiki.karotz.com/index.php/Main_Page>`_
