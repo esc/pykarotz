@@ -312,7 +312,6 @@ class Karotz(object):
             """ Spin left ear clockwise, right ear anticlockwise. """
             return self(left=-17, right=17)
 
-			
         def spin_ac(self):
             """ Spin left ear anticlockwise, right ear anticlockwise. """
             return self(left=17, right=-17)
