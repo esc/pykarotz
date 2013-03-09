@@ -14,20 +14,20 @@ setup (
   version = '0.2',
   #packages = find_packages('.', exclude=["*.tests", "*.tests.*", "tests.*", "testsrc"]),
   py_modules = ['karotz'],
-  # Declare your packages' dependencies here, for eg:                                                                        
-  install_requires=open('requirements.txt').read(),                                                                                        
-                                                                                                                             
-  # Fill in these to make your Egg ready for upload to                                                                       
-  # PyPI                                                                                                                     
-  author = __author__ ,                                                                                                          
-  author_email = '',                                                                                                         
-                                                                                                                             
-  description = 'karotz python API',                                                               
-  url = '',                                                                                                                  
-  license = 'MIT License',                                                                                                              
+  # Declare your packages' dependencies here, for eg:
+  install_requires=open('requirements.txt').read(),
+
+  # Fill in these to make your Egg ready for upload to
+  # PyPI
+  author = __author__ ,
+  author_email = '',
+
+  description = 'karotz python API',
+  url = '',
+  license = 'MIT License',
   long_description=open('../README.rst').read(),
   package_data = {
-        # include any *.conf 
+        # include any *.conf
 
     },
 
@@ -35,12 +35,12 @@ setup (
   entry_points={
     'console_scripts': [
     ]
-  },                                                                                                                             
-  # could also include long_description, download_url, classifiers, etc.                                                     
+  },
+  # could also include long_description, download_url, classifiers, etc.
   classifiers=[
         "Development Status :: 3 - Alpha",
         "Topic :: Utilities",
         "License :: OSI Approved :: MIT License",
-    ],                                                                                                                           
-                                                                                                                             
+    ],
+
 )
