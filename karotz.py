@@ -234,7 +234,7 @@ class Karotz(object):
         parameters['interactiveid'] = self.interactive_id
         file_like = urllib.urlopen(assemble_rest_call(function, parameters), proxies=self.proxies)
         return file_like.read()
-    
+
     def _rest_call(self, function, parameters):
         """ Make a rest call.
 
@@ -439,15 +439,15 @@ class Karotz(object):
 
         def __call__(self):
             """ Karotz' Config.
-    
+
             Returns
             -------
               An object (lxml) that is the karotz configuration
-    
+
             """
             res = self._karotz._basic_rest_call('config', {})
             return objectify.fromstring(res)
-            
+
 
     class Webcam(object):
         """ Karotz' Webcam.
@@ -489,7 +489,7 @@ class Karotz(object):
             return self._karotz._rest_call('multimedia',
                     {'action': action,
                      })
-            
+
         def play(self,url):
             """ Play multimedia.
 
