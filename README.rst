@@ -141,7 +141,7 @@ Similar Projects
 
 Links
 -----
-* 
+
 * `Github master repository <https://github.com/esc/pykarotz>`_
 * `Developer Pages (APIs etc..) <http://dev.karotz.com/>`_
 * `Google group 'KarotzDev' <http://groups.google.com/group/karotzdev>`_
