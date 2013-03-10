@@ -43,7 +43,9 @@ blog-post <http://blog.nofail.de/2011/12/karotz-ruby-love/>`_.
 After doing this, you will have the access credentials ``INSTALL_ID``,
 ``API_KEY`` and a ``SECRET``. You have several ways to use these with
 ``pykarotz``. The easiest is to place the configuration in a configuration file
-(standard INI format) in your home directory ``$HOME/.pykarotz``, for example::
+(standard INI format) in your home directory ``$HOME/.pykarotz``, for example:
+
+.. code:: ini
 
     [karotz-app-settings]
     apikey = 23426660-beef-beee-baad-food0000babe
@@ -51,7 +53,9 @@ After doing this, you will have the access credentials ``INSTALL_ID``,
     installid = 23426660-beef-beee-baad-food0000babe
 
 If you have done everything correctly, you can establish a connection and demo
-the available colors from an interactive Python prompt using::
+the available colors from an interactive Python prompt using:
+
+.. code:: pycon
 
     >>> import karotz as kz
     >>> krtz = kz.Karotz()
@@ -60,14 +64,18 @@ the available colors from an interactive Python prompt using::
 
 In case you have placed the file somewhere else, for example if you are using
 Windows and have placed the file at ``C:\pykarotz.txt``, you can initialise the
-``Karotz`` class using::
+``Karotz`` class using:
+
+.. code:: pycon
 
     >>> import karotz as kz
     >>> settings = kz.parse_config(config_filename="C:\pykarotz.txt")
     >>> krtz = kz.Karotz(settings=settings)
 
 If instead, you want to hardcode the settings in your Python source file, you
-can do something like::
+can do something like:
+
+.. code:: pycon
 
     >>> import karotz as kz
     >>> settings['apikey'] = "23426660-beef-beee-baad-food0000babe"
@@ -75,7 +83,9 @@ can do something like::
     >>> settings['secret'] = "23426660-beef-beee-baad-food0000babe"
     >>> krtz = kz.Karotz(settings=settings)
 
-If you have multiple units, you can save their settings in different sections::
+If you have multiple units, you can save their settings in different sections:
+
+.. code:: ini
 
     [karotz-one]
     apikey = 23426660-beef-beee-baad-food0000babe
@@ -86,7 +96,9 @@ If you have multiple units, you can save their settings in different sections::
     secret = 23426660-beef-beee-baad-food0000babe
     installid = 23426660-beef-beee-baad-food0000babe
 
-And then use the keyword argument `section` to load them::
+And then use the keyword argument `section` to load them:
+
+.. code:: pycon
 
     >>> import karotz as kz
     >>> krtz1 = kz.Karotz(kz.parse_config(section='karotz-one'))
@@ -102,7 +114,9 @@ Currently the following REST API calls are supported:
 * TTS
 
 You can access them in an object oriented fashion using ``kz.ears``, ``kz.led``
-and ``kz.tts``::
+and ``kz.tts``:
+
+.. code:: pycon
 
     >>> import karotz as kz
     >>> krtz = kz.Karotz()
@@ -125,7 +139,9 @@ See the directory ``examples`` for some example applications.:
 Testing
 -------
 
-Install `nose <http://readthedocs.org/docs/nose/en/latest/>`_ and then do::
+Install `nose <http://readthedocs.org/docs/nose/en/latest/>`_ and then do:
+
+.. code:: console
 
     $ nosetests
 
