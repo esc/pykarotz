@@ -141,7 +141,7 @@ Testing
 
 Install `nose <http://readthedocs.org/docs/nose/en/latest/>`_ and then do:
 
-.. code:: console
+.. code:: sh
 
     $ nosetests
 
