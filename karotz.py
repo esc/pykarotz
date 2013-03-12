@@ -221,7 +221,7 @@ class Karotz(object):
     def _basic_rest_call(self, function, parameters):
         """ Make a rest call.
 
-        Will assemble the url and make the call. Return hte body
+        Will assemble the url and make the call. Return the body
 
         Parameters
         ----------
@@ -474,7 +474,7 @@ class Karotz(object):
 
 
     class Multimedia(object):
-        """ Karotz' Multemdia.
+        """ Karotz' Multimedia.
 
         Parameters
         ----------
@@ -515,7 +515,7 @@ class Karotz(object):
             return self('resume')
 
         def stop(self):
-            """ Resume media.
+            """ Stop media.
 
             """
             return self('stop')
